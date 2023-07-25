@@ -1,0 +1,6 @@
+package com.example.washu
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
