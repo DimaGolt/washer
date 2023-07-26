@@ -51,22 +51,17 @@ class BackgroundClipper extends CustomPainter {
     //Path created from SVG on https://www.flutterclutter.dev/tools/svg-to-flutter-path-converter/
     path = Path();
     path.lineTo(0, size.height * 0.05 * multiplier);
-    path.cubicTo(size.width * 0.3, size.height * 0.1 * multiplier,
-        size.width * 0.4, 0, size.width * 0.6, 0);
     path.cubicTo(
-        size.width * 0.9,
-        0,
-        size.width,
-        size.height * 0.1 * multiplier,
-        size.width,
-        size.height * 0.1 * multiplier);
-    path.cubicTo(size.width, size.height * 0.1 * multiplier, size.width,
-        size.height, size.width, size.height);
+        size.width * 0.3, size.height * 0.1 * multiplier, size.width * 0.4, 0, size.width * 0.6, 0);
+    path.cubicTo(size.width * 0.9, 0, size.width, size.height * 0.07 * multiplier, size.width,
+        size.height * 0.07 * multiplier);
+    path.cubicTo(size.width, size.height * 0.1 * multiplier, size.width, size.height, size.width,
+        size.height);
     path.cubicTo(size.width, size.height, 0, size.height, 0, size.height);
-    path.cubicTo(0, size.height, 0, size.height * 0.05 * multiplier, 0,
+    path.cubicTo(
+        0, size.height, 0, size.height * 0.05 * multiplier, 0, size.height * 0.05 * multiplier);
+    path.cubicTo(0, size.height * 0.05, 0, size.height * 0.05 * multiplier, 0,
         size.height * 0.05 * multiplier);
-    path.cubicTo(0, size.height * 0.05, 0, size.height * 0.05 * multiplier,
-        0, size.height * 0.05 * multiplier);
     path.close();
     canvas.drawPath(path, paint);
   }
