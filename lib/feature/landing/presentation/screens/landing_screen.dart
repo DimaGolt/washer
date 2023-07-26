@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washu/shared/widgets/background_wave_container.dart';
 import 'package:washu/shared/widgets/logo_widget.dart';
@@ -24,12 +25,12 @@ class LandingScreen extends StatelessWidget {
                   width: double.infinity,
                   child: Center(
                     child: Text(
-                      'Log In',
+                      'button_login',
                       style: TextStyle(
                         fontSize: 20,
                         color: Theme.of(context).primaryColor,
                       ),
-                    ),
+                    ).tr(),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -44,9 +45,9 @@ class LandingScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 child: const Text(
-                  'Don\'t have an account?',
+                  'button_no_account',
                   style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
+                ).tr(),
               ),
             ],
           ),
