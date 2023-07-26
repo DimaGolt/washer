@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "575309658059",
+    "project_id": "washu-6ba03",
+    "storage_bucket": "washu-6ba03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575309658059:android:c39a5fd7e1c1b9d8f0284e",
+        "android_client_info": {
+          "package_name": "com.example.washu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575309658059-d0povle1ouabultv60gin31najttmkgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx7B_pqzrMhiyirjSp7SXQ2y-X0UZoE2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575309658059-d0povle1ouabultv60gin31najttmkgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "575309658059-d8oa9cef95tdn7mmmp4hlg8vfklvolfr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.washu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
