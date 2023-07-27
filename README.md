@@ -1,3 +1,5 @@
+[![Flutter Workflow](https://github.com/DimaGolt/washu/actions/workflows/main.yml/badge.svg)](https://github.com/DimaGolt/washu/actions/workflows/main.yml)
+
 # washu
 
 A new Flutter project.
