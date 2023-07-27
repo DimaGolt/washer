@@ -1,4 +1,8 @@
 {
-  "button_login": "Log In",
-  "button_no_account": "Don't have an account?"
+  "button_login": "Sign In",
+  "button_no_account": "Don't have an account?",
+  "button_register": "Sign Up",
+  "button_forgot_password": "Forgot password?",
+  "example_email": "example@mail.com",
+  "example_password": "*********"
 }
