@@ -1,8 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:washu/app/router.dart';
+import 'package:washu/app/theme.dart';
 import 'package:washu/shared/widgets/background_wave_container.dart';
 import 'package:washu/shared/widgets/logo_widget.dart';
 
+@RoutePage()
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
 
@@ -20,7 +24,8 @@ class LandingScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: context.router.showLoginScreen,
+                style: Theme.of(context).elevatedButtonThemeInverted,
                 child: SizedBox(
                   width: double.infinity,
                   child: Center(
@@ -33,17 +38,10 @@ class LandingScreen extends StatelessWidget {
                     ).tr(),
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                ),
               ),
               const SizedBox(height: 34),
               TextButton(
-                onPressed: () {},
+                onPressed: (){},
                 child: const Text(
                   'button_no_account',
                   style: TextStyle(fontSize: 18, color: Colors.white),
