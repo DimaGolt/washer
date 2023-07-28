@@ -10,11 +10,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(EasyLocalization(
-    useOnlyLangCode: true,
-    fallbackLocale: const Locale('en', 'US'),
-    supportedLocales: const [Locale('en', 'US'), Locale('pl', 'PL')],
-    path: 'assets/translations',
-    child: WashuApp(),
-  ));
+  runApp(
+    EasyLocalization(
+      useOnlyLangCode: true,
+      fallbackLocale: const Locale('en', 'US'),
+      supportedLocales: const [Locale('en', 'US'), Locale('pl', 'PL')],
+      path: 'assets/translations',
+      child: WashuApp(),
+    ),
+  );
 }

@@ -41,7 +41,7 @@ class LandingScreen extends StatelessWidget {
               ),
               const SizedBox(height: 34),
               TextButton(
-                onPressed: (){},
+                onPressed: context.router.showRegisterScreen,
                 child: const Text(
                   'button_no_account',
                   style: TextStyle(fontSize: 18, color: Colors.white),
