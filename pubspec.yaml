@@ -16,6 +16,7 @@ dependencies:
   easy_localization: ^3.0.2
   auto_route: ^7.7.1
   font_awesome_flutter: ^10.5.0
+  firebase_auth: ^4.7.2
 
 dev_dependencies:
   flutter_test:
