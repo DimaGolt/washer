@@ -16,6 +16,11 @@ class AppAuthRepository implements AuthRepository{
   }
 
   @override
+  Future<String?> loginGoogle() {
+    return _remote.loginGoogle();
+  }
+
+  @override
   void signOut() {
     return _remote.signOut();
   }

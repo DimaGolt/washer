@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:washu/shared/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -47,6 +48,30 @@ class RemoteAuthRepository implements AuthRepository {
       }
     }
     return error;
+  }
+
+  @override
+  Future<String?> loginGoogle() async {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      // Create a new credential
+      final googleCredential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      try {
+        final credential = await _auth.signInWithCredential(googleCredential);
+        debugPrint('Logged in with ${credential.user?.email} as ${credential.user?.displayName}');
+      } catch (e) {
+        debugPrint(e.toString());
+        return 'Unknown error occurred';
+      }
   }
 
   @override
