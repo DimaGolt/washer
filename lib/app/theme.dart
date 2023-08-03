@@ -48,6 +48,11 @@ ThemeData get washuLightTheme => ThemeData(
         elevation: 0,
         iconTheme: IconThemeData(size: 32),
       ),
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Color(0xFFE4ECED),
+        contentTextStyle: TextStyle(color: Color(0xFF007CBC), fontSize: 16),
+        behavior: SnackBarBehavior.floating,
+      ),
     );
 
 extension ElevatedButtons on ThemeData {
@@ -69,21 +74,22 @@ extension ElevatedButtons on ThemeData {
 }
 
 extension LoginDecorations on ThemeData {
-
-  passwordDecoration(bool suffixVisible) => InputDecoration(
-    prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
-    suffixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 40),
-    prefixIcon: const FaIcon(FontAwesomeIcons.key, size: 32),
-    suffixIcon: suffixVisible ? InkWell(
-      child: const FaIcon(FontAwesomeIcons.solidEye, size: 32),
-      onTap: () {},
-    ) : null,
-    hintText: 'example_password'.tr(),
-  );
+  passwordDecoration({required bool suffixVisible, Function()? onTap}) => InputDecoration(
+        prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
+        suffixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 40),
+        prefixIcon: const FaIcon(FontAwesomeIcons.key, size: 32),
+        suffixIcon: suffixVisible
+            ? InkWell(
+                onTap: onTap,
+                child: const FaIcon(FontAwesomeIcons.solidEye, size: 32),
+              )
+            : null,
+        hintText: 'example_password'.tr(),
+      );
 
   emailDecoration() => InputDecoration(
-    prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
-    prefixIcon: const FaIcon(FontAwesomeIcons.solidUser, size: 32),
-    hintText: 'example_email'.tr(),
-  );
+        prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
+        prefixIcon: const FaIcon(FontAwesomeIcons.solidUser, size: 32),
+        hintText: 'example_email'.tr(),
+      );
 }

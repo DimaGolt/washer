@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../feature/landing/presentation/screens/landing_screen.dart';
 import '../feature/login/presentation/screens/login_screen.dart';
@@ -17,7 +18,7 @@ class AppRouter extends _$AppRouter {
 }
 
 extension RouterExtension on StackRouter {
-  Future showLoginScreen() => push(const LoginRoute());
+  Future showLoginScreen() => push(LoginRoute());
 
   Future showRegisterScreen() => push(const RegisterRoute());
 }

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:washu/app/theme.dart';
+import 'package:washu/shared/data/app_auth_repository.dart';
 import 'package:washu/shared/widgets/logo_widget.dart';
 
 import '../../../../shared/widgets/background_wave_container.dart';
@@ -55,12 +56,17 @@ class RegisterScreen extends StatelessWidget {
           TextField(
             style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
             textAlign: TextAlign.center,
-            decoration: Theme.of(context).passwordDecoration(true),
+            decoration: Theme.of(context).passwordDecoration(
+              suffixVisible: true,
+              onTap: () {
+                AppAuthRepository().signOut();
+              }
+            ),
           ),
           TextField(
             style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
             textAlign: TextAlign.center,
-            decoration: Theme.of(context).passwordDecoration(false),
+            decoration: Theme.of(context).passwordDecoration(suffixVisible: false),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
