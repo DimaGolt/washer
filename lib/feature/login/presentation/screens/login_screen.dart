@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:washu/app/theme.dart';
 import 'package:washu/feature/login/presentation/bloc/login_cubit.dart';
