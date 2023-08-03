@@ -33,16 +33,14 @@ class RemoteAuthRepository implements AuthRepository {
   Future<String?> loginEmail(String email, String password) async {
     String? error;
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+      final credential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       debugPrint('Logged in with ${credential.user?.email}');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        error ='No user found for that email.';
+        error = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
-        error ='Wrong password provided for that user.';
+        error = 'Wrong password provided for that user.';
       } else {
         error = 'Unknown error occurred';
       }
@@ -52,26 +50,26 @@ class RemoteAuthRepository implements AuthRepository {
 
   @override
   Future<String?> loginGoogle() async {
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
+    // Once signed in, return the UserCredential
+    try {
       // Create a new credential
       final googleCredential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
 
-      // Once signed in, return the UserCredential
-      try {
-        final credential = await _auth.signInWithCredential(googleCredential);
-        debugPrint('Logged in with ${credential.user?.email} as ${credential.user?.displayName}');
-      } catch (e) {
-        debugPrint(e.toString());
-        return 'Unknown error occurred';
-      }
+      final credential = await _auth.signInWithCredential(googleCredential);
+      debugPrint('Logged in with ${credential.user?.email} as ${credential.user?.displayName}');
+    } catch (e) {
+      debugPrint(e.toString());
+      return 'Unknown error occurred';
+    }
   }
 
   @override

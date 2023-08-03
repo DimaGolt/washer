@@ -20,5 +20,5 @@ class AppRouter extends _$AppRouter {
 extension RouterExtension on StackRouter {
   Future showLoginScreen() => push(LoginRoute());
 
-  Future showRegisterScreen() => push(const RegisterRoute());
+  Future showRegisterScreen() => push(RegisterRoute());
 }
