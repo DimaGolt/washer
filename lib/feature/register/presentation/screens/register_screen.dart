@@ -20,6 +20,7 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
   final GlobalKey<FormFieldState> repeatKey = GlobalKey();
 
   final ValueNotifier<bool> isLoading = ValueNotifier(false);
+  final ValueNotifier<bool> isObscured = ValueNotifier(true);
 
   @override
   void listener(BuildContext context, RegisterCubit bloc, RegisterState state) {
@@ -67,83 +68,90 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
   _form(RegisterCubit bloc, ThemeData theme) {
     return Form(
       key: formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          TextFormField(
-            key: emailKey,
-            style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
-            keyboardType: TextInputType.emailAddress,
-            textAlign: TextAlign.center,
-            decoration: theme.emailDecoration(),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'E-mail can\'t be empty';
-              }
-              return value.matchesEmail() ? null : 'E-mail invalid';
-            },
-          ),
-          TextFormField(
-            key: passwordKey,
-            style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
-            textAlign: TextAlign.center,
-            decoration: theme.passwordDecoration(
-              suffixVisible: true,
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Password can\'t be empty';
-              }
-              return value.matchesPassword() ? null : 'Password invalid';
-            },
-          ),
-          TextFormField(
-            key: repeatKey,
-            style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
-            textAlign: TextAlign.center,
-            decoration: theme.passwordDecoration(suffixVisible: false),
-            validator: (value) {
-              if (value != passwordKey.currentState!.value) {
-                return 'Passwords aren\'t the same';
-              }
-              return null;
-            },
-          ),
-          ValueListenableBuilder(
-              valueListenable: isLoading,
-              builder: (_, isLoading, __) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: isLoading ? null : bloc.registerGoogle,
-                      style: theme.circularButtonThemeInverted,
-                      child: FaIcon(
-                        FontAwesomeIcons.google,
-                        color: theme.primaryColor,
-                        size: 36,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      child: ElevatedButton(
-                        style: theme.elevatedButtonThemeInverted,
-                        onPressed: isLoading ? null : () => _validateAndRegister(bloc),
-                        child: Text(
-                          'button_register',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: theme.primaryColor,
+      child: ValueListenableBuilder(
+          valueListenable: isObscured,
+          builder: (_, obscured, __) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextFormField(
+                  key: emailKey,
+                  style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  decoration: theme.emailDecoration(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'E-mail can\'t be empty';
+                    }
+                    return value.matchesEmail() ? null : 'E-mail invalid';
+                  },
+                ),
+                TextFormField(
+                  key: passwordKey,
+                  style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
+                  textAlign: TextAlign.center,
+                  obscureText: obscured,
+                  decoration: theme.passwordDecoration(
+                    suffixVisible: true,
+                    onTap: () => isObscured.value = !obscured,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password can\'t be empty';
+                    }
+                    return value.matchesPassword() ? null : 'Password invalid';
+                  },
+                ),
+                TextFormField(
+                  key: repeatKey,
+                  style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
+                  textAlign: TextAlign.center,
+                  obscureText: obscured,
+                  decoration: theme.passwordDecoration(suffixVisible: false),
+                  validator: (value) {
+                    if (value != passwordKey.currentState!.value) {
+                      return 'Passwords aren\'t the same';
+                    }
+                    return null;
+                  },
+                ),
+                ValueListenableBuilder(
+                    valueListenable: isLoading,
+                    builder: (_, isLoading, __) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: isLoading ? null : bloc.registerGoogle,
+                            style: theme.circularButtonThemeInverted,
+                            child: FaIcon(
+                              FontAwesomeIcons.google,
+                              color: theme.primaryColor,
+                              size: 36,
+                            ),
                           ),
-                        ).tr(),
-                      ),
-                    ),
-                  ],
-                );
-              }),
-        ],
-      ),
+                          SizedBox(
+                            width: 200,
+                            child: ElevatedButton(
+                              style: theme.elevatedButtonThemeInverted,
+                              onPressed: isLoading ? null : () => _validateAndRegister(bloc),
+                              child: Text(
+                                'button_register',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: theme.primaryColor,
+                                ),
+                              ).tr(),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+              ],
+            );
+          }),
     );
   }
 
