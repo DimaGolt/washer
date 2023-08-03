@@ -19,6 +19,7 @@ class LoginScreen extends BlocConsumerWidget<LoginCubit, LoginState> {
   final GlobalKey<FormFieldState> passwordKey = GlobalKey();
 
   final ValueNotifier<bool> isLoading = ValueNotifier(false);
+  final ValueNotifier<bool> isObscured = ValueNotifier(true);
 
   @override
   void listener(BuildContext context, LoginCubit bloc, LoginState state) {
@@ -93,25 +94,32 @@ class LoginScreen extends BlocConsumerWidget<LoginCubit, LoginState> {
           return value.matchesEmail() ? null : 'E-mail invalid';
         },
       ),
-      TextFormField(
-        key: passwordKey,
-        style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
-        textAlign: TextAlign.center,
-        decoration: theme.passwordDecoration(suffixVisible: true),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Password can\'t be empty';
-          }
-          return value.matchesPassword() ? null : 'Password invalid';
-        },
+      ValueListenableBuilder(
+        builder: (_, obscured, __) => TextFormField(
+          key: passwordKey,
+          style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
+          textAlign: TextAlign.center,
+          obscureText: obscured,
+          decoration: theme.passwordDecoration(
+            suffixVisible: true,
+            onTap: () => isObscured.value = !obscured,
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Password can\'t be empty';
+            }
+            return value.matchesPassword() ? null : 'Password invalid';
+          },
+        ),
+        valueListenable: isObscured,
       ),
       ValueListenableBuilder(
-        builder: (_, __, ___) => Row(
+        builder: (_, isLoading, __) => Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: bloc.loginGoogle,
+              onPressed: isLoading ? null : bloc.loginGoogle,
               style: theme.circularButtonThemeInverted,
               child: FaIcon(
                 FontAwesomeIcons.google,
@@ -123,7 +131,7 @@ class LoginScreen extends BlocConsumerWidget<LoginCubit, LoginState> {
               width: 200,
               child: ElevatedButton(
                 style: theme.elevatedButtonThemeInverted,
-                onPressed: isLoading.value ? null : () => _validateAndLogin(bloc),
+                onPressed: isLoading ? null : () => _validateAndLogin(bloc),
                 child: Text(
                   'button_login',
                   style: TextStyle(
