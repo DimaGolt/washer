@@ -1,4 +1,4 @@
-import 'package:auto_route/annotations.dart';
+import 'package:washu/app/router.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
