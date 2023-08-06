@@ -47,6 +47,7 @@ ThemeData get washuLightTheme => ThemeData(
         color: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(size: 32),
+        centerTitle: true,
       ),
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Color(0xFFE4ECED),

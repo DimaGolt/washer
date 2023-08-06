@@ -1,8 +1,8 @@
-import 'package:auto_route/annotations.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:washu/app/router.dart';
 import 'package:washu/app/theme.dart';
 import 'package:washu/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:washu/shared/utils/string_regexp.dart';
@@ -59,7 +59,7 @@ class LoginScreen extends BlocConsumerWidget<LoginCubit, LoginState> {
                         children: [
                           ..._form(bloc, theme),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: context.router.showForgotPasswordScreen,
                             child: const Text(
                               'button_forgot_password',
                               style: TextStyle(fontSize: 18, color: Colors.white),
