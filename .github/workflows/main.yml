@@ -1,8 +1,12 @@
 name: Flutter Workflow
 
-on: [push, workflow_dispatch]
+on:
+  pull_request:
+    types:
+      - submitted
 jobs:
-  build:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: macos-latest
     steps:
       - name: Checkout code
