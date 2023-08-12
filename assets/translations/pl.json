@@ -4,9 +4,10 @@
   "button_register": "Zarejestruj",
   "button_forgot_password": "Zapomniałeś hasło?",
   "example_email": "example@mail.com",
+  "example_name": "Jan Kowalski",
   "example_password": "*********",
   "forgot_password_appbar": "Resetowanie hasła",
   "forgot_password_header": "Zapomniałeś hasło?",
-  "forgot_password_text": "Nie martw się! Zapisz swój adres e-mail, a my wyślemy Ci kod resetujący.",
+  "forgot_password_text": "Nie martw się! Zapisz swój adres e-mail, a my wyślemy Ci link do strony z resetowaniem hasła.",
   "forgot_password_fab": "Wyślij kod"
 }

@@ -3,7 +3,7 @@ import 'package:washu/shared/utils/string_regexp.dart';
 
 class MockAuthRepository implements AuthRepository {
   @override
-  Future<String?> createUserWithEmail(String email, String password) async {
+  Future<String?> createUserWithEmail(String email, String password, String fullName) async {
     Future.delayed(const Duration(seconds: 1));
     if (!email.matchesEmail()) {
       return 'Bad email';

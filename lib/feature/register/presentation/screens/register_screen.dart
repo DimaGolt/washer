@@ -16,6 +16,7 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
 
   final GlobalKey<FormState> formKey = GlobalKey();
   final GlobalKey<FormFieldState> emailKey = GlobalKey();
+  final GlobalKey<FormFieldState> nameKey = GlobalKey();
   final GlobalKey<FormFieldState> passwordKey = GlobalKey();
   final GlobalKey<FormFieldState> repeatKey = GlobalKey();
 
@@ -51,7 +52,7 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
                 const LogoWidget(),
                 const Spacer(),
                 BackgroundWaveContainer(
-                  height: 400,
+                  height: 450,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 20.0),
                     child: _form(bloc, theme),
@@ -85,6 +86,19 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
                       return 'E-mail can\'t be empty';
                     }
                     return value.matchesEmail() ? null : 'E-mail invalid';
+                  },
+                ),
+                TextFormField(
+                  key: nameKey,
+                  style: const TextStyle(color: Color(0xFFB1E3F9), fontSize: 20),
+                  keyboardType: TextInputType.name,
+                  textAlign: TextAlign.center,
+                  decoration: theme.nameDecoration(),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name can\'t be empty';
+                    }
+                    return value.contains(' ') ? null : 'Name invalid';
                   },
                 ),
                 TextFormField(
@@ -157,7 +171,11 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
 
   _validateAndRegister(RegisterCubit bloc) {
     if (formKey.currentState!.validate()) {
-      bloc.registerWithEmail(emailKey.currentState!.value, passwordKey.currentState!.value);
+      bloc.registerWithEmail(
+        emailKey.currentState!.value,
+        passwordKey.currentState!.value,
+        nameKey.currentState!.value,
+      );
     }
   }
 }

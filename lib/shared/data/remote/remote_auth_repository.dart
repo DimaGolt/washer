@@ -7,14 +7,15 @@ class RemoteAuthRepository implements AuthRepository {
   final _auth = FirebaseAuth.instance;
 
   @override
-  Future<String?> createUserWithEmail(String email, String password) async {
+  Future<String?> createUserWithEmail(String email, String password, String fullName) async {
     String? error;
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      debugPrint(credential.user?.email);
+      await credential.user?.updateDisplayName(fullName);
+      debugPrint('created ${credential.user?.email}');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         error = 'The password provided is too weak.';
@@ -35,7 +36,7 @@ class RemoteAuthRepository implements AuthRepository {
     try {
       final credential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      debugPrint('Logged in with ${credential.user?.email}');
+      debugPrint('Logged in with ${credential.user?.email} as ${credential.user?.displayName}');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         error = 'No user found for that email.';
