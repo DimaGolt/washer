@@ -47,6 +47,7 @@ ThemeData get washuLightTheme => ThemeData(
         color: Colors.transparent,
         elevation: 0,
         iconTheme: IconThemeData(size: 32),
+        centerTitle: true,
       ),
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Color(0xFFE4ECED),
@@ -74,7 +75,8 @@ extension ElevatedButtons on ThemeData {
 }
 
 extension LoginDecorations on ThemeData {
-  passwordDecoration({required bool suffixVisible, Function()? onTap}) => InputDecoration(
+  InputDecoration passwordDecoration({required bool suffixVisible, Function()? onTap}) =>
+      InputDecoration(
         prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
         suffixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 40),
         prefixIcon: const FaIcon(FontAwesomeIcons.key, size: 32),
@@ -87,8 +89,20 @@ extension LoginDecorations on ThemeData {
         hintText: 'example_password'.tr(),
       );
 
-  emailDecoration() => InputDecoration(
+  InputDecoration emailDecoration() => InputDecoration(
         prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
+        prefixIcon: const FaIcon(FontAwesomeIcons.solidUser, size: 32),
+        hintText: 'example_email'.tr(),
+      );
+
+  InputDecoration emailForgotDecoration() => InputDecoration(
+        border: UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
+        enabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
+        prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
+        prefixIconColor: washuLightTheme.primaryColor,
         prefixIcon: const FaIcon(FontAwesomeIcons.solidUser, size: 32),
         hintText: 'example_email'.tr(),
       );

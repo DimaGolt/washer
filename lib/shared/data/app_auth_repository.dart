@@ -1,9 +1,10 @@
+import 'package:washu/shared/data/mock/mock_auth_repository.dart';
 import 'package:washu/shared/data/remote/remote_auth_repository.dart';
 import 'package:washu/shared/domain/repositories/auth_repository.dart';
 
-class AppAuthRepository implements AuthRepository{
+class AppAuthRepository implements AuthRepository {
   final _remote = RemoteAuthRepository();
-
+  final _mock = MockAuthRepository();
 
   @override
   Future<String?> createUserWithEmail(String email, String password) {
@@ -23,5 +24,10 @@ class AppAuthRepository implements AuthRepository{
   @override
   void signOut() {
     return _remote.signOut();
+  }
+
+  @override
+  Future<String?> forgotPassword(String email) {
+    return _remote.forgotPassword(email);
   }
 }
