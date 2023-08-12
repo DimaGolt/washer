@@ -77,4 +77,15 @@ class RemoteAuthRepository implements AuthRepository {
     await _auth.signOut();
     debugPrint('Logged out');
   }
+
+  @override
+  Future<String?> forgotPassword(String email) async {
+    String? error;
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      error = e.message;
+    }
+    return error;
+  }
 }

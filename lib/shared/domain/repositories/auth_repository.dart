@@ -4,6 +4,7 @@ abstract class AuthRepository {
   Future<String?> createUserWithEmail(String email, String password);
   Future<String?> loginEmail(String email, String password);
   Future<String?> loginGoogle();
+  Future<String?> forgotPassword(String email);
   void signOut();
 
   factory AuthRepository.build() => AppAuthRepository();

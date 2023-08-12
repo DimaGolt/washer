@@ -5,10 +5,10 @@ class MockAuthRepository implements AuthRepository {
   @override
   Future<String?> createUserWithEmail(String email, String password) async {
     Future.delayed(const Duration(seconds: 1));
-    if(!email.matchesEmail()) {
+    if (!email.matchesEmail()) {
       return 'Bad email';
     }
-    if(!password.matchesPassword()) {
+    if (!password.matchesPassword()) {
       return 'Bad password';
     }
     //TODO: give user
@@ -17,10 +17,10 @@ class MockAuthRepository implements AuthRepository {
   @override
   Future<String?> loginEmail(String email, String password) async {
     await Future.delayed(const Duration(seconds: 1));
-    if(!email.matchesEmail()) {
+    if (!email.matchesEmail()) {
       return 'Bad email';
     }
-    if(!password.matchesPassword()) {
+    if (!password.matchesPassword()) {
       return 'Bad password';
     }
     //TODO: give user
@@ -37,4 +37,12 @@ class MockAuthRepository implements AuthRepository {
     // TODO: take user
   }
 
+  @override
+  Future<String?> forgotPassword(String email) async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (!email.matchesEmail()) {
+      return 'Bad email';
+    }
+    return 'Mock email sent';
+  }
 }
