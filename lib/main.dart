@@ -13,7 +13,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if(kDebugMode) {
+  if (kDebugMode) {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   }
 

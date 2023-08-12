@@ -95,6 +95,12 @@ extension LoginDecorations on ThemeData {
         hintText: 'example_email'.tr(),
       );
 
+  InputDecoration nameDecoration() => InputDecoration(
+        prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
+        prefixIcon: const FaIcon(FontAwesomeIcons.solidUser, size: 32),
+        hintText: 'example_name'.tr(),
+      );
+
   InputDecoration emailForgotDecoration() => InputDecoration(
         border: UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
         enabledBorder:

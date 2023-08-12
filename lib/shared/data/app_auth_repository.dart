@@ -7,8 +7,8 @@ class AppAuthRepository implements AuthRepository {
   final _mock = MockAuthRepository();
 
   @override
-  Future<String?> createUserWithEmail(String email, String password) {
-    return _remote.createUserWithEmail(email, password);
+  Future<String?> createUserWithEmail(String email, String password, String fullName) {
+    return _remote.createUserWithEmail(email, password, fullName);
   }
 
   @override

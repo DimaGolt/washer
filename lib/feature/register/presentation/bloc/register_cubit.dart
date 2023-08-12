@@ -14,9 +14,9 @@ class RegisterCubit extends Cubit<RegisterState> {
       : _authRepository = authRepository,
         super(const RegisterState.initial());
 
-  void registerWithEmail(String email, String password) async {
+  void registerWithEmail(String email, String password, String fullName) async {
     emit(const RegisterState.loading());
-    String? error = await _authRepository.createUserWithEmail(email, password);
+    String? error = await _authRepository.createUserWithEmail(email, password, fullName);
     if (error != null) {
       emit(RegisterState.error(error));
       return;
