@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWave extends StatelessWidget implements PreferredSizeWidget {
@@ -19,9 +20,16 @@ class AppBarWave extends StatelessWidget implements PreferredSizeWidget {
               color: Colors.white,
               size: 32,
             ),
-            title: Text(
-              title ?? '',
-              style: const TextStyle(color: Colors.white),
+            title: Center(
+              child: Text(
+                title ?? '',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Poppins',
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ).tr(),
             ),
           ),
         ],
@@ -30,7 +38,7 @@ class AppBarWave extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 25);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 30);
 }
 
 class MyPainter extends CustomPainter {

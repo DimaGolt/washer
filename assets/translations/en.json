@@ -4,5 +4,9 @@
   "button_register": "Sign Up",
   "button_forgot_password": "Forgot password?",
   "example_email": "example@mail.com",
-  "example_password": "*********"
+  "example_password": "*********",
+  "forgot_password_appbar": "Reset password",
+  "forgot_password_header": "Forgot password?",
+  "forgot_password_text": "Don’t worry! We got you covered! Write your email down and we’ll send you reset code.",
+  "forgot_password_fab": "Send email"
 }

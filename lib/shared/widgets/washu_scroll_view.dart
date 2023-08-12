@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class WashuScrollView extends StatelessWidget {
-  final List<Widget> children;
+  final Widget child;
 
-  const WashuScrollView({super.key, required this.children});
+  const WashuScrollView({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: const EdgeInsets.only(top: kToolbarHeight + 75),
-        child: Column(
-          children: children,
-        ),
+        padding: EdgeInsets.only(
+            top: kToolbarHeight + 75, bottom: MediaQuery.of(context).viewInsets.bottom + 125),
+        child: child,
       ),
     );
   }
