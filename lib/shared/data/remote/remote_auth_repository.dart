@@ -7,15 +7,16 @@ class RemoteAuthRepository implements AuthRepository {
   final _auth = FirebaseAuth.instance;
 
   @override
-  Future<String?> createUserWithEmail(String email, String password, String fullName) async {
+  Future<User> createUserWithEmail(String email, String password, String fullName) async {
     String? error;
+    User user;
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       await credential.user?.updateDisplayName(fullName);
-      debugPrint('created ${credential.user?.email}');
+      user = credential.user!;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         error = 'The password provided is too weak.';
@@ -24,18 +25,21 @@ class RemoteAuthRepository implements AuthRepository {
       } else {
         error = 'Unknown error occurred';
       }
+      throw AuthException(message: error);
     } catch (e) {
-      error = 'Unknown error occurred';
+      throw AuthException(message: 'Unknown error occurred');
     }
-    return error;
+    return user;
   }
 
   @override
-  Future<String?> loginEmail(String email, String password) async {
+  Future<User> loginEmail(String email, String password) async {
     String? error;
+    User user;
     try {
       final credential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      user = credential.user!;
       debugPrint('Logged in with ${credential.user?.email} as ${credential.user?.displayName}');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -45,32 +49,28 @@ class RemoteAuthRepository implements AuthRepository {
       } else {
         error = 'Unknown error occurred';
       }
+      throw AuthException(message: error);
     }
-    return error;
+    return user;
   }
 
   @override
-  Future<String?> loginGoogle() async {
-    // Trigger the authentication flow
+  Future<User> loginGoogle() async {
+    User user;
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-    // Once signed in, return the UserCredential
     try {
-      // Create a new credential
       final googleCredential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
 
       final credential = await _auth.signInWithCredential(googleCredential);
-      debugPrint('Logged in with ${credential.user?.email} as ${credential.user?.displayName}');
+      user = credential.user!;
     } catch (e) {
-      debugPrint(e.toString());
-      return 'Unknown error occurred';
+      throw AuthException(message: 'Unknown error occurred');
     }
+    return user;
   }
 
   @override
@@ -80,13 +80,11 @@ class RemoteAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<String?> forgotPassword(String email) async {
-    String? error;
+  Future<void> forgotPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      error = e.message;
+      throw AuthException(message: 'Unknown error occurred');
     }
-    return error;
   }
 }
