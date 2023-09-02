@@ -1,34 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:washu/shared/domain/repositories/auth_repository.dart';
 import 'package:washu/shared/utils/string_regexp.dart';
 
 class MockAuthRepository implements AuthRepository {
   @override
-  Future<String?> createUserWithEmail(String email, String password, String fullName) async {
+  Future<User> createUserWithEmail(String email, String password, String fullName) async {
     Future.delayed(const Duration(seconds: 1));
     if (!email.matchesEmail()) {
-      return 'Bad email';
+      throw AuthException(message: 'Bad email');
     }
     if (!password.matchesPassword()) {
-      return 'Bad password';
+      throw AuthException(message: 'Bad password');
     }
-    //TODO: give user
+    return FirebaseAuth.instance.currentUser!;
   }
 
   @override
-  Future<String?> loginEmail(String email, String password) async {
+  Future<User> loginEmail(String email, String password) async {
     await Future.delayed(const Duration(seconds: 1));
     if (!email.matchesEmail()) {
-      return 'Bad email';
+      throw AuthException(message: 'Bad email');
     }
     if (!password.matchesPassword()) {
-      return 'Bad password';
+      throw AuthException(message: 'Bad password');
     }
-    //TODO: give user
+    return FirebaseAuth.instance.currentUser!;
   }
 
   @override
-  Future<String?> loginGoogle() async {
+  Future<User> loginGoogle() async {
     await Future.delayed(const Duration(seconds: 1));
+    return FirebaseAuth.instance.currentUser!;
     //TODO: give random user
   }
 
@@ -38,11 +40,11 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<String?> forgotPassword(String email) async {
+  Future<void> forgotPassword(String email) async {
     await Future.delayed(const Duration(seconds: 1));
     if (!email.matchesEmail()) {
-      return 'Bad email';
+      throw AuthException(message: 'Bad email');
     }
-    return 'Mock email sent';
+    throw AuthException(message: 'Mock email sent');
   }
 }

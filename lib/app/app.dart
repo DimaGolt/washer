@@ -19,6 +19,7 @@ class WashuApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        RepositoryProvider(create: (_) => authRepository),
         BlocProvider(create: (_) => LoginCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => RegisterCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => ForgotPasswordCubit(authRepository: authRepository)),

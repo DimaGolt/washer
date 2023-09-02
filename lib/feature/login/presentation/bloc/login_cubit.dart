@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:washu/shared/domain/repositories/auth_repository.dart';
@@ -15,9 +16,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   void loginWithEmail(String email, String password) async {
     emit(const LoginState.loading());
-    String? error = await _authRepository.loginEmail(email, password);
-    if(error != null) {
-      emit(LoginState.error(error));
+    try {
+      await _authRepository.loginEmail(email, password);
+    } catch (e) {
+      emit(LoginState.error(e.toString()));
       return;
     }
     emit(const LoginState.success());
@@ -25,9 +27,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   void loginGoogle() async {
     emit(const LoginState.loading());
-    String? error = await _authRepository.loginGoogle();
-    if(error != null) {
-      emit(LoginState.error(error));
+    try {
+      await _authRepository.loginGoogle();
+    } catch (e) {
+      emit(LoginState.error(e.toString()));
       return;
     }
     emit(const LoginState.success());
