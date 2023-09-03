@@ -27,7 +27,7 @@ class LoginScreen extends BlocConsumerWidget<LoginCubit, LoginState> {
         isLoading.value = false;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
       },
-      // success: (state) {},
+      success: (state) => context.router.showHomeScreen(),
       loading: (state) => isLoading.value = true,
       orElse: () => isLoading.value = (state is Loading),
     );
