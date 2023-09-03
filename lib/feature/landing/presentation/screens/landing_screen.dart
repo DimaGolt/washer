@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:washu/app/router.dart';
 import 'package:washu/app/theme.dart';
@@ -46,6 +47,11 @@ class LandingScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ).tr(),
               ),
+              if (kDebugMode)
+                TextButton(
+                  onPressed: context.router.showDebugScreen,
+                  child: const Text('debug'),
+                ),
             ],
           ),
         ),

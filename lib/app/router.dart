@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 export 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../feature/debug/presentation/screens/debug_screen.dart';
 import '../feature/forgor_pass/presentation/screens/forgot_password_screen.dart';
 import '../feature/home/presentation/screens/home_screen.dart';
 import '../feature/landing/presentation/screens/landing_screen.dart';
@@ -19,6 +20,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: RegisterRoute.page),
         AutoRoute(page: ForgotPasswordRoute.page),
         AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: DebugRoute.page),
       ];
 }
 
@@ -30,4 +32,6 @@ extension RouterExtension on StackRouter {
   Future showForgotPasswordScreen() => push(ForgotPasswordRoute());
 
   Future showHomeScreen() => pushAndPopUntil(const HomeRoute(), predicate: (_) => false);
+
+  Future showDebugScreen() => push(const DebugRoute());
 }
