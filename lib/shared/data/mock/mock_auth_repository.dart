@@ -4,6 +4,9 @@ import 'package:washu/shared/utils/string_regexp.dart';
 
 class MockAuthRepository implements AuthRepository {
   @override
+  User get user => throw UnimplementedError();
+
+  @override
   Future<User> createUserWithEmail(String email, String password, String fullName) async {
     Future.delayed(const Duration(seconds: 1));
     if (!email.matchesEmail()) {

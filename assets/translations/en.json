@@ -9,5 +9,12 @@
   "forgot_password_appbar": "Reset password",
   "forgot_password_header": "Forgot password?",
   "forgot_password_text": "Don’t worry! We got you covered! Write your email down and we’ll send you reset link.",
-  "forgot_password_fab": "Send email"
+  "forgot_password_fab": "Send email",
+  "book_laundry": "Book laundry",
+  "report_machine": "Report machine",
+  "check_bookings": "Check your bookings",
+  "settings": "Settings",
+  "greetings": "Welcome back",
+  "active_laundry_title": "Laundry in progress",
+  "active_laundry_subtitle": "Click to check it!"
 }

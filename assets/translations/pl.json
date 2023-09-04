@@ -9,5 +9,12 @@
   "forgot_password_appbar": "Resetowanie hasła",
   "forgot_password_header": "Zapomniałeś hasło?",
   "forgot_password_text": "Nie martw się! Zapisz swój adres e-mail, a my wyślemy Ci link do strony z resetowaniem hasła.",
-  "forgot_password_fab": "Wyślij kod"
+  "forgot_password_fab": "Wyślij kod",
+  "book_laundry": "Zarezerwuj pranie",
+  "report_machine": "Zgłoś pralkę",
+  "check_bookings": "Sprawdź rezerwacje",
+  "settings": "Ustawienia",
+  "greetings": "Witaj ponownie",
+  "active_laundry_title": "Pranie w toku",
+  "active_laundry_subtitle": "Kliknij aby sprawdzić!"
 }

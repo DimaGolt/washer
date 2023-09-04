@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   firebase_core: ^2.15.0
   easy_localization: ^3.0.2
-  auto_route: ^7.7.1
+  auto_route: ^7.8.3
   font_awesome_flutter: ^10.5.0
   firebase_auth: ^4.7.2
   google_sign_in: ^6.1.4

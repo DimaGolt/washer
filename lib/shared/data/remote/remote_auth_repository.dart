@@ -7,6 +7,9 @@ class RemoteAuthRepository implements AuthRepository {
   final _auth = FirebaseAuth.instance;
 
   @override
+  User get user => throw UnimplementedError();
+
+  @override
   Future<User> createUserWithEmail(String email, String password, String fullName) async {
     String? error;
     User user;
