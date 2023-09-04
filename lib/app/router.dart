@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 export 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../feature/active_laundry/presentation/screens/active_laundry_screen.dart';
 import '../feature/debug/presentation/screens/debug_screen.dart';
 import '../feature/forgor_pass/presentation/screens/forgot_password_screen.dart';
 import '../feature/home/presentation/screens/home_screen.dart';
@@ -21,6 +22,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ForgotPasswordRoute.page),
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: DebugRoute.page),
+        AutoRoute(page: ActiveLaundryRoute.page),
       ];
 }
 
@@ -34,4 +36,6 @@ extension RouterExtension on StackRouter {
   Future showHomeScreen() => pushAndPopUntil(const HomeRoute(), predicate: (_) => false);
 
   Future showDebugScreen() => push(const DebugRoute());
+
+  Future showActiveLaundry() => push(const ActiveLaundryRoute());
 }

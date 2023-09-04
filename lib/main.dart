@@ -14,7 +14,7 @@ void main() async {
   );
 
   if (kDebugMode) {
-    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+    await FirebaseAuth.instance.useAuthEmulator('192.168.100.8', 9099);
   }
 
   runApp(
