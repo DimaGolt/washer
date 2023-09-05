@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:washu/app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:washu/feature/active_laundry/presentation/widgets/laundry_window_widget.dart';
@@ -43,21 +44,21 @@ class ActiveLaundryScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Laundry in progress',
+                'active_laundry_title',
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 24,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
-              ),
+              ).tr(),
               const Text(
-                'While the laundry works its magic, why not treat yourself to a small indulgence? Savor a cup of your favorite tea or coffee, or nibble on a delightful snack. Let this be your personal time to recharge and embrace moments of self-discovery.',
+                'active_laundry_text',
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFD4D4D4)),
-              ),
+              ).tr(),
               const Center(
                 child: LaundryWindowWidget(),
               ),
