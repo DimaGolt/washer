@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                           height: 100,
                           width: double.infinity,
                           child: ActiveLaundryButton(
-                            onTap: () {},
+                            onTap: context.router.showActiveLaundry,
                           ),
                         ),
                       ),

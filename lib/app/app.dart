@@ -31,6 +31,11 @@ class WashuApp extends StatelessWidget {
         locale: context.locale,
         theme: washuLightTheme,
         routerConfig: _appRouter.config(),
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaleFactor: 1.0), //TODO: change with clamp someday
+          child: child!,
+        ),
       ),
     );
   }
