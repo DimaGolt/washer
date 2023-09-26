@@ -5,6 +5,8 @@ import 'package:washu/app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:washu/feature/active_laundry/presentation/widgets/laundry_window_widget.dart';
 
+import '../widgets/liquid_progress_indicator.dart';
+
 @RoutePage()
 class ActiveLaundryScreen extends StatelessWidget {
   const ActiveLaundryScreen({super.key});
@@ -62,12 +64,13 @@ class ActiveLaundryScreen extends StatelessWidget {
               const Center(
                 child: LaundryWindowWidget(),
               ),
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const SizedBox(
-                    width: double.infinity,
-                    child: Text('data'),
-                  )),
+              const SizedBox(
+                height: 60,
+                width: double.infinity,
+                child: LiquidIndicator(
+                  percentage: 50,
+                ),
+              ),
             ],
           ),
         ),
