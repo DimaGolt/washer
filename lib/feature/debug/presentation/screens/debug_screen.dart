@@ -33,6 +33,10 @@ class DebugScreen extends StatelessWidget {
               title: const Text('Home'),
               onTap: () => context.router.showHomeScreen(),
             ),
+            ListTile(
+              title: const Text('Active laundry'),
+              onTap: () => context.router.showActiveLaundry(),
+            ),
           ],
         ),
       ),
