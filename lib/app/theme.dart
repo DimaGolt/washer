@@ -5,16 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 ThemeData get washuLightTheme => ThemeData(
       fontFamily: 'BlackHanSans',
       primarySwatch: const MaterialColor(0xFF68A8C9, <int, Color>{
-        50: Color(0x0D68A8C9),
-        100: Color(0x1A68A8C9),
-        200: Color(0x3368A8C9),
-        300: Color(0x4D68A8C9),
-        400: Color(0x6668A8C9),
-        500: Color(0x8068A8C9),
-        600: Color(0x9968A8C9),
-        700: Color(0xB368A8C9),
-        800: Color(0xCC68A8C9),
-        900: Color(0xE668A8C9),
+        50: Color(0xFFEDF5F9),
+        100: Color(0xFFD2E5EF),
+        200: Color(0xFFB4D4E4),
+        300: Color(0xFF95C2D9),
+        400: Color(0xFF7FB5D1),
+        500: Color(0xFF68A8C9),
+        600: Color(0xFF60A0C3),
+        700: Color(0xFF5597BC),
+        800: Color(0xFF4B8DB5),
+        900: Color(0xFF3A7DA9),
       }),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -46,8 +46,14 @@ ThemeData get washuLightTheme => ThemeData(
       appBarTheme: const AppBarTheme(
         color: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(size: 32),
+        iconTheme: IconThemeData(size: 32, color: Colors.white),
         centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontFamily: 'BlackHanSans',
+        ),
       ),
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Color(0xFFE4ECED),
