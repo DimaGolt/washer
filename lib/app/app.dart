@@ -7,6 +7,7 @@ import 'package:washu/feature/forgor_pass/presentation/bloc/forgot_password_cubi
 import 'package:washu/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:washu/feature/register/presentation/bloc/register_cubit.dart';
 import 'package:washu/shared/domain/repositories/auth_repository.dart';
+import 'package:washu/shared/domain/repositories/db_repository.dart';
 
 class WashuApp extends StatelessWidget {
   WashuApp({Key? key}) : super(key: key);
@@ -16,10 +17,12 @@ class WashuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authRepository = AuthRepository.build();
+    final dbRepository = DbRepository.build();
 
     return MultiBlocProvider(
       providers: [
         RepositoryProvider(create: (_) => authRepository),
+        RepositoryProvider(create: (_) => dbRepository),
         BlocProvider(create: (_) => LoginCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => RegisterCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => ForgotPasswordCubit(authRepository: authRepository)),
