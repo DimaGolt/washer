@@ -9,13 +9,14 @@ class MixedDbRepository implements DbRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   @override
-  getDorms() async {
+  Future<List<Dorm>> getDorms() async {
     var foo = await _db.collection('dorms').get();
     var foo2 = foo.docs.map((dorm) => Dorm.fromJson(dorm.data())).toList();
-    print(foo2);
+    return foo2;
   }
 
-  getFloorLaundromats(Floor floor) async {
+  @override
+  Future<List<Laundromat>> getFloorLaundromats(Floor floor) async {
     Floor parent = floor;
     if (parent.isEmpty) {
       var json = await floor.selfReference!.get();
@@ -39,16 +40,40 @@ class MixedDbRepository implements DbRepository {
   }
 
   @override
-  getFloors() async {
-    var foo = await _db.collection('floors').get();
-    var foo2 = foo.docs.map((dorm) => Floor.fromJson(dorm.data())).toList();
-    print(foo2);
+  Future<List<Floor>> getDormFloors(Dorm dorm) async {
+    Dorm parent = dorm;
+    if (parent.isEmpty) {
+      var json = await dorm.selfReference!.get();
+      if (json.exists) {
+        parent = Dorm.fromJson(json.data()!);
+      } else {
+        throw DatabaseException(message: 'Couldn\'t find this dorm');
+      }
+    }
+
+    List<Floor> result = [];
+    for (Floor floor in parent.floors!) {
+      var json = await floor.selfReference!.get();
+      if (json.exists) {
+        Floor full = Floor.fromJson(json.data()!);
+        result.add(full);
+      }
+    }
+
+    return result;
   }
 
   @override
-  getLaundromats() async {
+  Future<List<Floor>> getFloors() async {
+    var foo = await _db.collection('floors').get();
+    var foo2 = foo.docs.map((dorm) => Floor.fromJson(dorm.data())).toList();
+    return foo2;
+  }
+
+  @override
+  Future<List<Laundromat>> getLaundromats() async {
     var foo = await _db.collection('laundromats').get();
     var foo2 = foo.docs.map((dorm) => Laundromat.fromJson(dorm.data())).toList();
-    print(foo2);
+    return foo2;
   }
 }

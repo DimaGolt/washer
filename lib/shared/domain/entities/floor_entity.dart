@@ -15,7 +15,6 @@ class Floor {
     this.dorm,
     this.laundromats,
   });
-
   bool get isEmpty => dorm == null && selfReference != null;
 
   Floor.fromJson(Map<String, Object?> json)
