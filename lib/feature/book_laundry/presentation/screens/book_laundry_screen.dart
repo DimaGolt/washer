@@ -16,14 +16,23 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
   List<Floor> floors = [];
   List<Laundromat> laundromats = [];
 
+  Dorm? selectedDorm;
+  Floor? selectedFloor;
+
+  bool enableDorms = false;
+  bool enableFloors = false;
+
   @override
   void listener(BuildContext context, BookLaundryBloc bloc, BookLaundryState state) {
     state.maybeMap(
       loadedDorms: (state) {
         dorms = state.dorms;
+        enableDorms = true;
+        enableFloors = false;
       },
       pickedDorm: (state) {
         floors = state.floors;
+        enableFloors = true;
       },
       pickedFloor: (state) {
         laundromats = state.laundromats;
@@ -54,7 +63,7 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
                   children: [
-                    DropdownButton2(
+                    DropdownButton2<Dorm>(
                       isExpanded: true,
                       buttonStyleData: const ButtonStyleData(
                           decoration: BoxDecoration(
@@ -72,15 +81,23 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                         'Please wait...',
                         style: TextStyle(color: Colors.grey[300]),
                       ),
+                      value: selectedDorm,
                       items: dorms
                           .map((e) => DropdownMenuItem(
-                                value: e.name,
+                                value: e,
                                 child: Text(e.name),
                               ))
                           .toList(),
-                      onChanged: state.runtimeType != Initial ? (_) {} : null,
+                      onChanged: enableDorms
+                          ? (val) {
+                              selectedDorm = val;
+                              if (selectedDorm != null) {
+                                bloc.add(BookLaundryEvent.pickDorm(selectedDorm!));
+                              }
+                            }
+                          : null,
                     ),
-                    DropdownButton2(
+                    DropdownButton2<Floor>(
                       isExpanded: true,
                       buttonStyleData: const ButtonStyleData(
                           decoration: BoxDecoration(
@@ -98,17 +115,21 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                         'Please, pick your dorm first',
                         style: TextStyle(color: Colors.grey[300]),
                       ),
-                      items: const [
-                        DropdownMenuItem(
-                          value: 'we',
-                          child: Text('we'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'wee',
-                          child: Text('wee'),
-                        ),
-                      ],
-                      onChanged: state.runtimeType == PickedDorm ? (_) {} : null,
+                      value: selectedFloor,
+                      items: floors
+                          .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text('${e.level} floor'),
+                              ))
+                          .toList(),
+                      onChanged: enableFloors
+                          ? (val) {
+                              selectedFloor = val;
+                              if (selectedFloor != null) {
+                                bloc.add(BookLaundryEvent.pickFloor(selectedFloor!));
+                              }
+                            }
+                          : null,
                     ),
                     const SizedBox(height: 30),
                   ],
