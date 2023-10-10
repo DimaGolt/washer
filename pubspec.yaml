@@ -24,6 +24,7 @@ dependencies:
   wave: ^0.2.2
   dropdown_button2: ^2.3.9
   cloud_firestore: ^4.9.3
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

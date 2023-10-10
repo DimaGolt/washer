@@ -2,49 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:washu/feature/book_laundry/presentation/bloc/book_laundry_bloc.dart';
 
 import '../../../../shared/domain/entities/dorm_entity.dart';
 import '../../../../shared/domain/entities/floor_entity.dart';
 import '../../../../shared/domain/entities/laundromat_entity.dart';
+import '../bloc/book_laundry_bloc.dart';
 
 @RoutePage()
 class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryState> {
   BookLaundryScreen({super.key});
 
-  List<Dorm> dorms = [];
-  List<Floor> floors = [];
-  List<Laundromat> laundromats = [];
-
-  Dorm? selectedDorm;
-  Floor? selectedFloor;
-
-  bool enableDorms = false;
-  bool enableFloors = false;
-
-  @override
-  void listener(BuildContext context, BookLaundryBloc bloc, BookLaundryState state) {
-    state.maybeMap(
-      loadedDorms: (state) {
-        dorms = state.dorms;
-        enableDorms = true;
-        enableFloors = false;
-      },
-      pickedDorm: (state) {
-        floors = state.floors;
-        enableFloors = true;
-      },
-      pickedFloor: (state) {
-        laundromats = state.laundromats;
-      },
-      orElse: () {},
-    );
-  }
-
   @override
   void onMount(BookLaundryBloc bloc) {
     super.onMount(bloc);
-    bloc.add(BookLaundryEvent.started());
+    bloc.add(BookLaundryStart());
   }
 
   @override
@@ -81,18 +52,17 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                         'Please wait...',
                         style: TextStyle(color: Colors.grey[300]),
                       ),
-                      value: selectedDorm,
-                      items: dorms
+                      value: state.selectedDorm,
+                      items: state.dorms
                           .map((e) => DropdownMenuItem(
                                 value: e,
                                 child: Text(e.name),
                               ))
                           .toList(),
-                      onChanged: enableDorms
+                      onChanged: state.status != BookLaundryStatus.initial
                           ? (val) {
-                              selectedDorm = val;
-                              if (selectedDorm != null) {
-                                bloc.add(BookLaundryEvent.pickDorm(selectedDorm!));
+                              if (val != null) {
+                                bloc.add(BookLaundryPickDorm(val));
                               }
                             }
                           : null,
@@ -115,18 +85,17 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                         'Please, pick your dorm first',
                         style: TextStyle(color: Colors.grey[300]),
                       ),
-                      value: selectedFloor,
-                      items: floors
+                      value: state.selectedFloor,
+                      items: state.floors
                           .map((e) => DropdownMenuItem(
                                 value: e,
                                 child: Text('${e.level} floor'),
                               ))
                           .toList(),
-                      onChanged: enableFloors
+                      onChanged: state.selectedDorm != null
                           ? (val) {
-                              selectedFloor = val;
-                              if (selectedFloor != null) {
-                                bloc.add(BookLaundryEvent.pickFloor(selectedFloor!));
+                              if (val != null) {
+                                bloc.add(BookLaundryPickFloor(val));
                               }
                             }
                           : null,
@@ -141,6 +110,20 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+                  child: GridView.count(
+                    crossAxisCount: 3,
+                    children: state.laundromats
+                        .map((e) => Card(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.local_laundry_service_outlined),
+                                  Center(child: Text('${e.floor!.level}')),
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                  ),
                 ),
               ),
             ],

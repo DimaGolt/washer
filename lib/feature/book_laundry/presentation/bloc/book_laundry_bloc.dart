@@ -1,42 +1,48 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:washu/shared/domain/repositories/db_repository.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../../shared/domain/entities/dorm_entity.dart';
 import '../../../../shared/domain/entities/floor_entity.dart';
 import '../../../../shared/domain/entities/laundromat_entity.dart';
+import '../../../../shared/domain/repositories/db_repository.dart';
 
 part 'book_laundry_event.dart';
 
 part 'book_laundry_state.dart';
 
-part 'book_laundry_bloc.freezed.dart';
-
 class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
   final DbRepository dbRepository;
 
-  BookLaundryBloc({required this.dbRepository}) : super(const BookLaundryState.initial()) {
-    on<BookLaundryEvent>((event, emit) async {
-      await event.map(
-        started: (_) async => await _fetchDorms(emit),
-        pickDorm: (event) async => await _fetchFloors(event, emit),
-        pickFloor: (event) async => await _fetchLaundromats(event, emit),
-      );
-    });
+  BookLaundryBloc({required this.dbRepository}) : super(BookLaundryState()) {
+    on<BookLaundryStart>(_fetchDorms);
+    on<BookLaundryPickDorm>(_fetchFloors);
+    on<BookLaundryPickFloor>(_fetchLaundromats);
   }
 
-  _fetchDorms(Emitter<BookLaundryState> emit) async {
+  _fetchDorms(BookLaundryStart event, Emitter<BookLaundryState> emit) async {
+    emit(BookLaundryState());
     final dorms = await dbRepository.getDorms();
-    emit(LoadedDorms(dorms));
+    emit(state.copyWith(status: BookLaundryStatus.loadedDorms, dorms: dorms));
   }
 
-  _fetchFloors(PickDorm event, Emitter<BookLaundryState> emit) async {
+  _fetchFloors(BookLaundryPickDorm event, Emitter<BookLaundryState> emit) async {
     final floors = await dbRepository.getDormFloors(event.dorm);
-    emit(PickedDorm(floors));
+    emit(state.copyWith(
+      status: BookLaundryStatus.pickedDorm,
+      floors: floors,
+      selectedDorm: event.dorm,
+    ));
   }
 
-  _fetchLaundromats(PickFloor event, Emitter<BookLaundryState> emit) async {
+  _fetchLaundromats(BookLaundryPickFloor event, Emitter<BookLaundryState> emit) async {
     final List<Laundromat> laundromats = await dbRepository.getFloorLaundromats(event.floor);
-    emit(PickedFloor(laundromats));
+    emit(state.copyWith(
+      status: BookLaundryStatus.pickedFloor,
+      laundromats: laundromats,
+      selectedDorm: state.selectedDorm,
+      selectedFloor: event.floor,
+    ));
   }
 }
