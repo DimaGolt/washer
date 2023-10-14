@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class WashuScrollView extends StatelessWidget {
+class WasherScrollView extends StatelessWidget {
   final Widget child;
 
-  const WashuScrollView({super.key, required this.child});
+  const WasherScrollView({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

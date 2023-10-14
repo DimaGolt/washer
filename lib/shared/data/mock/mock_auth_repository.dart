@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:washu/shared/domain/repositories/auth_repository.dart';
-import 'package:washu/shared/utils/string_regexp.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/shared/utils/string_regexp.dart';
 
 class MockAuthRepository implements AuthRepository {
   @override

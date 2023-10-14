@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:washu/app/router.dart';
-import 'package:washu/feature/home/presentation/widgets/active_laundry_button.dart';
-import 'package:washu/feature/home/presentation/widgets/menu_tile.dart';
-import 'package:washu/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/app/router.dart';
+import 'package:washer/feature/home/presentation/widgets/active_laundry_button.dart';
+import 'package:washer/feature/home/presentation/widgets/menu_tile.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {

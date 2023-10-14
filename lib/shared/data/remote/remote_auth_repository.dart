@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:washu/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RemoteAuthRepository implements AuthRepository {

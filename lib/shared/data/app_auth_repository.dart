@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:washu/shared/data/remote/remote_auth_repository.dart';
-import 'package:washu/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/shared/data/remote/remote_auth_repository.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 
 class AppAuthRepository implements AuthRepository {
   User? _user;

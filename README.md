@@ -1,6 +1,6 @@
-[![Flutter Workflow](https://github.com/DimaGolt/washu/actions/workflows/main.yml/badge.svg)](https://github.com/DimaGolt/washu/actions/workflows/main.yml)
+[![Flutter Workflow](https://github.com/DimaGolt/washer/actions/workflows/main.yml/badge.svg)](https://github.com/DimaGolt/washer/actions/workflows/main.yml)
 
-# washu
+# washer
 
 A new Flutter project.
 

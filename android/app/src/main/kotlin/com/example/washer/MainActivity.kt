@@ -1,4 +1,4 @@
-package com.example.washu
+package com.example.washer
 
 import io.flutter.embedding.android.FlutterActivity
 

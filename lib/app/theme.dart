@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-ThemeData get washuLightTheme => ThemeData(
+ThemeData get washerLightTheme => ThemeData(
       fontFamily: 'BlackHanSans',
       primarySwatch: const MaterialColor(0xFF68A8C9, <int, Color>{
         50: Color(0x0D68A8C9),
@@ -102,13 +102,13 @@ extension LoginDecorations on ThemeData {
       );
 
   InputDecoration emailForgotDecoration() => InputDecoration(
-        border: UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
+        border: UnderlineInputBorder(borderSide: BorderSide(color: washerLightTheme.primaryColor)),
         enabledBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
+            UnderlineInputBorder(borderSide: BorderSide(color: washerLightTheme.primaryColor)),
         focusedBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: washuLightTheme.primaryColor)),
+            UnderlineInputBorder(borderSide: BorderSide(color: washerLightTheme.primaryColor)),
         prefixIconConstraints: const BoxConstraints(maxHeight: 32, maxWidth: 32),
-        prefixIconColor: washuLightTheme.primaryColor,
+        prefixIconColor: washerLightTheme.primaryColor,
         prefixIcon: const FaIcon(FontAwesomeIcons.solidUser, size: 32),
         hintText: 'example_email'.tr(),
       );

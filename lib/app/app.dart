@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:washu/app/router.dart';
-import 'package:washu/app/theme.dart';
+import 'package:washer/app/router.dart';
+import 'package:washer/app/theme.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:washu/feature/forgor_pass/presentation/bloc/forgot_password_cubit.dart';
-import 'package:washu/feature/login/presentation/bloc/login_cubit.dart';
-import 'package:washu/feature/register/presentation/bloc/register_cubit.dart';
-import 'package:washu/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/feature/forgor_pass/presentation/bloc/forgot_password_cubit.dart';
+import 'package:washer/feature/login/presentation/bloc/login_cubit.dart';
+import 'package:washer/feature/register/presentation/bloc/register_cubit.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 
-class WashuApp extends StatelessWidget {
-  WashuApp({Key? key}) : super(key: key);
+class WasherApp extends StatelessWidget {
+  WasherApp({Key? key}) : super(key: key);
 
   final _appRouter = AppRouter();
 
@@ -25,11 +25,11 @@ class WashuApp extends StatelessWidget {
         BlocProvider(create: (_) => ForgotPasswordCubit(authRepository: authRepository)),
       ],
       child: MaterialApp.router(
-        title: 'Washu',
+        title: 'Washer',
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: washuLightTheme,
+        theme: washerLightTheme,
         routerConfig: _appRouter.config(),
         builder: (context, child) => MediaQuery(
           data: MediaQuery.of(context)

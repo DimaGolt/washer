@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:washu/app/router.dart';
-import 'package:washu/app/theme.dart';
-import 'package:washu/shared/widgets/background_wave_container.dart';
-import 'package:washu/shared/widgets/logo_widget.dart';
+import 'package:washer/app/router.dart';
+import 'package:washer/app/theme.dart';
+import 'package:washer/shared/widgets/background_wave_container.dart';
+import 'package:washer/shared/widgets/logo_widget.dart';
 
 @RoutePage()
 class LandingScreen extends StatelessWidget {

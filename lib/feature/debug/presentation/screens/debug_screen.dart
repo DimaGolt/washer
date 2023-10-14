@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:washu/app/router.dart';
-import 'package:washu/shared/widgets/appbar_wave.dart';
-import 'package:washu/shared/widgets/washu_scroll_view.dart';
+import 'package:washer/app/router.dart';
+import 'package:washer/shared/widgets/appbar_wave.dart';
+import 'package:washer/shared/widgets/washer_scroll_view.dart';
 
 @RoutePage()
 class DebugScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class DebugScreen extends StatelessWidget {
       appBar: const AppBarWave(
         title: 'Debug',
       ),
-      body: WashuScrollView(
+      body: WasherScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

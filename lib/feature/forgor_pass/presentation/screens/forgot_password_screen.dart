@@ -2,11 +2,11 @@ import 'package:auto_route/annotations.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:washu/app/theme.dart';
-import 'package:washu/feature/forgor_pass/presentation/bloc/forgot_password_cubit.dart';
-import 'package:washu/shared/utils/string_regexp.dart';
-import 'package:washu/shared/widgets/appbar_wave.dart';
-import 'package:washu/shared/widgets/washu_scroll_view.dart';
+import 'package:washer/app/theme.dart';
+import 'package:washer/feature/forgor_pass/presentation/bloc/forgot_password_cubit.dart';
+import 'package:washer/shared/utils/string_regexp.dart';
+import 'package:washer/shared/widgets/appbar_wave.dart';
+import 'package:washer/shared/widgets/washer_scroll_view.dart';
 
 @RoutePage()
 class ForgotPasswordScreen extends BlocConsumerWidget<ForgotPasswordCubit, ForgotPasswordState> {
@@ -37,7 +37,7 @@ class ForgotPasswordScreen extends BlocConsumerWidget<ForgotPasswordCubit, Forgo
       appBar: const AppBarWave(
         title: 'forgot_password_appbar',
       ),
-      body: WashuScrollView(
+      body: WasherScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: Column(

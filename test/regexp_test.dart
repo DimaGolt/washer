@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:washu/shared/utils/string_regexp.dart';
+import 'package:washer/shared/utils/string_regexp.dart';
 
 void main() {
   group('Email tests', () {

@@ -46,7 +46,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.washu"
+        applicationId "com.example.washer"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -60,7 +60,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    namespace 'com.example.washu'
+    namespace 'com.example.washer'
 }
 
 flutter {

@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:washu/app/router.dart';
+import 'package:washer/app/router.dart';
 import 'package:flutter/material.dart';
-import 'package:washu/feature/active_laundry/presentation/widgets/laundry_window_widget.dart';
+import 'package:washer/feature/active_laundry/presentation/widgets/laundry_window_widget.dart';
 
 import '../widgets/liquid_progress_indicator.dart';
 
