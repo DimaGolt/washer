@@ -3,13 +3,11 @@ import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:washu/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
 
-import '../../../../shared/domain/entities/dorm_entity.dart';
-import '../../../../shared/domain/entities/floor_entity.dart';
 import '../bloc/book_laundry_bloc.dart';
 
 @RoutePage()
-class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryState> {
-  const BookLaundryScreen({super.key});
+class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryState> {
+  const PickMachineScreen({super.key});
 
   @override
   void onMount(BookLaundryBloc bloc) {
@@ -35,6 +33,7 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                   children: [
                     StyledDropdownButton(
                       selectedValue: state.selectedDorm,
+                      hintText: 'Dorm',
                       values: state.dorms
                           .map((e) => DropdownMenuItem(
                                 value: e,
@@ -48,9 +47,10 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                               }
                             }
                           : null,
-                      hintText: 'Dorm',
                     ),
                     StyledDropdownButton(
+                      margin: const EdgeInsets.only(top: 8, bottom: 16),
+                      hintText: 'Floor',
                       selectedValue: state.selectedFloor,
                       values: state.floors
                           .map((e) => DropdownMenuItem(
@@ -65,8 +65,6 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                               }
                             }
                           : null,
-                      hintText: 'Floor',
-                      margin: const EdgeInsets.only(top: 8, bottom: 16),
                     ),
                   ],
                 ),
@@ -78,9 +76,12 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16), topRight: Radius.circular(16))),
                   child: GridView.count(
+                    mainAxisSpacing: 3,
+                    crossAxisSpacing: 3,
                     crossAxisCount: 3,
                     children: state.laundromats
                         .map((e) => Card(
+                              elevation: 3,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
@@ -103,7 +104,7 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                                         children: [
                                           Text('Price:'),
                                           Text(
-                                            '\$ 0.25',
+                                            '\$ 0.25/h',
                                             style: TextStyle(color: Colors.green),
                                           ),
                                         ],

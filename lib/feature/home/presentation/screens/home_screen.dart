@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                           crossAxisCount: 2,
                           children: [
                             MenuTile(
-                              onTap: context.router.showBookLaundry,
+                              onTap: context.router.showPickMachine,
                               icon: FontAwesomeIcons.solidCalendarMinus,
                               label: 'book_laundry'.tr(),
                               position: TilePosition.upLeft,
