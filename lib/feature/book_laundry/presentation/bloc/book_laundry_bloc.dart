@@ -38,6 +38,7 @@ class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
 
   _fetchLaundromats(BookLaundryPickFloor event, Emitter<BookLaundryState> emit) async {
     final List<Laundromat> laundromats = await dbRepository.getFloorLaundromats(event.floor);
+    laundromats.sort((a, b) => a.number!.compareTo(b.number!));
     emit(state.copyWith(
       status: BookLaundryStatus.pickedFloor,
       laundromats: laundromats,

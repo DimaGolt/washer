@@ -95,7 +95,7 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('Machine nr. ${state.laundromats.indexOf(e) + 1}'),
+                                Text('Machine nr. ${e.number}'),
                                 const Icon(
                                   Icons.local_laundry_service_outlined,
                                   size: 54,
