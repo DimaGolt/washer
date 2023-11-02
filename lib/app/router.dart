@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:washu/feature/book_laundry/presentation/screens/pick_machine_screen.dart';
 
 import '../feature/active_laundry/presentation/screens/active_laundry_screen.dart';
+import '../feature/book_laundry/presentation/screens/book_laundry_screen.dart';
 import '../feature/debug/presentation/screens/debug_screen.dart';
 import '../feature/forgor_pass/presentation/screens/forgot_password_screen.dart';
 import '../feature/home/presentation/screens/home_screen.dart';
@@ -25,6 +26,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: DebugRoute.page),
         AutoRoute(page: ActiveLaundryRoute.page),
         AutoRoute(page: PickMachineRoute.page),
+        AutoRoute(page: BookLaundryRoute.page),
       ];
 }
 
@@ -44,4 +46,6 @@ extension RouterExtension on StackRouter {
   Future showActiveLaundry() => push(const ActiveLaundryRoute());
 
   Future showPickMachine() => push(const PickMachineRoute());
+
+  Future showBookLaundry() => push(const BookLaundryRoute());
 }

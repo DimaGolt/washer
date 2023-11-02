@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:washu/app/router.dart';
 import 'package:washu/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
 
 import '../bloc/book_laundry_bloc.dart';
@@ -79,42 +80,53 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                     mainAxisSpacing: 3,
                     crossAxisSpacing: 3,
                     crossAxisCount: 3,
-                    children: state.laundromats
-                        .map((e) => Card(
-                              elevation: 3,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text('Machine nr. ${state.laundromats.indexOf(e) + 1}'),
-                                  const Icon(
-                                    Icons.local_laundry_service_outlined,
-                                    size: 54,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(e.dorm!.name),
-                                          Text('Floor ${e.floor!.level}'),
-                                        ],
-                                      ),
-                                      const Column(
-                                        children: [
-                                          Text('Price:'),
-                                          Text(
-                                            '\$ 0.25/h',
-                                            style: TextStyle(color: Colors.green),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ))
-                        .toList(),
+                    children: state.laundromats.map(
+                      (e) {
+                        final borderRadius = BorderRadius.circular(8);
+
+                        return Card(
+                          shape: RoundedRectangleBorder(borderRadius: borderRadius),
+                          elevation: 3,
+                          child: InkWell(
+                            borderRadius: borderRadius,
+                            onTap: () {
+                              context.router.showBookLaundry();
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('Machine nr. ${state.laundromats.indexOf(e) + 1}'),
+                                const Icon(
+                                  Icons.local_laundry_service_outlined,
+                                  size: 54,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(e.dorm!.name),
+                                        Text('Floor ${e.floor!.level}'),
+                                      ],
+                                    ),
+                                    const Column(
+                                      children: [
+                                        Text('Price:'),
+                                        Text(
+                                          '\$ 0.25/h',
+                                          style: TextStyle(color: Colors.green),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ).toList(),
                   ),
                 ),
               ),
