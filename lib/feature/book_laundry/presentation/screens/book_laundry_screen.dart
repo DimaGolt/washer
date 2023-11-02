@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:washu/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
 
 import '../../../../shared/domain/entities/dorm_entity.dart';
 import '../../../../shared/domain/entities/floor_entity.dart';
-import '../../../../shared/domain/entities/laundromat_entity.dart';
 import '../bloc/book_laundry_bloc.dart';
 
 @RoutePage()
@@ -33,60 +33,26 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
                   children: [
-                    DropdownButton<Dorm>(
-                        isExpanded: true,
-                        value: state.selectedDorm,
-                        hint: Text(
-                          'Dorm',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        icon: Icon(Icons.expand_more),
-                        iconSize: 32,
-                        underline: Container(
-                          height: 1.0,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.white,
-                                width: 1.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        items: state.dorms
-                            .map((e) => DropdownMenuItem(
-                                  child: Text(e.name),
-                                  value: e,
-                                ))
-                            .toList(),
-                        onChanged: state.status != BookLaundryStatus.initial
-                            ? (val) {
-                                if (val != null) {
-                                  bloc.add(BookLaundryPickDorm(val));
-                                }
+                    StyledDropdownButton(
+                      selectedValue: state.selectedDorm,
+                      values: state.dorms
+                          .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e.name),
+                              ))
+                          .toList(),
+                      onChanged: state.status != BookLaundryStatus.initial
+                          ? (val) {
+                              if (val != null && val != state.selectedDorm) {
+                                bloc.add(BookLaundryPickDorm(val));
                               }
-                            : null),
-                    DropdownButton<Floor>(
-                      isExpanded: true,
-                      underline: Container(
-                        height: 1.0,
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Colors.white,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      icon: Icon(Icons.expand_more),
-                      iconSize: 32,
-                      hint: const Text(
-                        'Floor',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      value: state.selectedFloor,
-                      items: state.floors
+                            }
+                          : null,
+                      hintText: 'Dorm',
+                    ),
+                    StyledDropdownButton(
+                      selectedValue: state.selectedFloor,
+                      values: state.floors
                           .map((e) => DropdownMenuItem(
                                 value: e,
                                 child: Text('Floor ${e.level}'),
@@ -94,13 +60,14 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                           .toList(),
                       onChanged: state.selectedDorm != null
                           ? (val) {
-                              if (val != null) {
+                              if (val != null && val != state.selectedFloor) {
                                 bloc.add(BookLaundryPickFloor(val));
                               }
                             }
                           : null,
+                      hintText: 'Floor',
+                      margin: const EdgeInsets.only(top: 8, bottom: 16),
                     ),
-                    const SizedBox(height: 30),
                   ],
                 ),
               ),
@@ -118,7 +85,7 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Text('Machine nr. ${state.laundromats.indexOf(e) + 1}'),
-                                  Icon(
+                                  const Icon(
                                     Icons.local_laundry_service_outlined,
                                     size: 54,
                                   ),
@@ -128,11 +95,11 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('${e.dorm!.name}'),
+                                          Text(e.dorm!.name),
                                           Text('Floor ${e.floor!.level}'),
                                         ],
                                       ),
-                                      Column(
+                                      const Column(
                                         children: [
                                           Text('Price:'),
                                           Text(
