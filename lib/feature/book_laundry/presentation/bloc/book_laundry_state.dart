@@ -1,6 +1,6 @@
 part of 'book_laundry_bloc.dart';
 
-enum BookLaundryStatus { initial, loadedDorms, pickedDorm, pickedFloor, failure }
+enum BookLaundryStatus { initial, loadedDorms, pickedDorm, pickedFloor, pickedMachine, failure }
 
 final class BookLaundryState extends Equatable {
   BookLaundryState({
@@ -10,6 +10,7 @@ final class BookLaundryState extends Equatable {
     this.laundromats = const [],
     this.selectedDorm,
     this.selectedFloor,
+    this.selectedLaundromat,
   });
 
   final BookLaundryStatus status;
@@ -18,6 +19,7 @@ final class BookLaundryState extends Equatable {
   final List<Laundromat> laundromats;
   Dorm? selectedDorm;
   Floor? selectedFloor;
+  Laundromat? selectedLaundromat;
 
   BookLaundryState copyWith({
     BookLaundryStatus? status,
@@ -26,6 +28,7 @@ final class BookLaundryState extends Equatable {
     List<Laundromat>? laundromats,
     Dorm? selectedDorm,
     Floor? selectedFloor,
+    Laundromat? selectedLaundromat,
   }) {
     return BookLaundryState(
       status: status ?? this.status,
@@ -34,9 +37,18 @@ final class BookLaundryState extends Equatable {
       laundromats: laundromats ?? this.laundromats,
       selectedDorm: selectedDorm,
       selectedFloor: selectedFloor,
+      selectedLaundromat: selectedLaundromat,
     );
   }
 
   @override
-  List<Object> get props => [status, dorms, floors, laundromats];
+  List<Object?> get props => [
+        status,
+        dorms,
+        floors,
+        laundromats,
+        selectedDorm,
+        selectedFloor,
+        selectedLaundromat,
+      ];
 }

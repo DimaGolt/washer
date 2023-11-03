@@ -19,6 +19,7 @@ class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
     on<BookLaundryStart>(_fetchDorms);
     on<BookLaundryPickDorm>(_fetchFloors);
     on<BookLaundryPickFloor>(_fetchLaundromats);
+    on<BookLaundryPickMachine>(_setMachine);
   }
 
   _fetchDorms(BookLaundryStart event, Emitter<BookLaundryState> emit) async {
@@ -44,6 +45,15 @@ class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
       laundromats: laundromats,
       selectedDorm: state.selectedDorm,
       selectedFloor: event.floor,
+    ));
+  }
+
+  _setMachine(BookLaundryPickMachine event, Emitter<BookLaundryState> emit) {
+    emit(state.copyWith(
+      status: BookLaundryStatus.pickedMachine,
+      selectedDorm: state.selectedDorm,
+      selectedFloor: state.selectedFloor,
+      selectedLaundromat: event.laundromat,
     ));
   }
 }

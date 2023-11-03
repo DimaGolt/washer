@@ -26,7 +26,7 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Machine nr. X',
+                  'Machine nr. ${state.selectedLaundromat!.number}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Text(
@@ -41,8 +41,8 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                 'To book a washing machine fill the form below. \nProvide time and date and choose program type.',
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -50,10 +50,8 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Text('Floor ${state.selectedFloor!.level}'),
-                      // Text(state.selectedDorm!.name),
-                      Text('Floor X'),
-                      Text('T-X'),
+                      Text('Floor ${state.selectedFloor!.level}'),
+                      Text(state.selectedDorm!.name),
                     ],
                   ),
                   Text('Max weight: 5 kg'),

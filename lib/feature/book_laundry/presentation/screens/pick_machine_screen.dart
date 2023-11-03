@@ -90,7 +90,11 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                           child: InkWell(
                             borderRadius: borderRadius,
                             onTap: () {
-                              context.router.showBookLaundry();
+                              bloc.add(BookLaundryPickMachine(e));
+                              bloc.stream
+                                  .firstWhere(
+                                      (state) => state.status == BookLaundryStatus.pickedMachine)
+                                  .then((value) => context.router.showBookLaundry());
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
