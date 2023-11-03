@@ -1,18 +1,33 @@
-import 'dart:ffi';
+import 'dart:math';
 
 import 'package:bloc_widgets/bloc_widgets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:washu/app/router.dart';
 import 'package:washu/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
+import 'package:washu/shared/utils/datetime.dart';
+import 'package:washu/shared/widgets/laundry_time_picker.dart';
 
 import '../bloc/book_laundry_bloc.dart';
 
 @RoutePage()
-class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryState> {
+class BookLaundryScreen extends StatefulWidget {
   const BookLaundryScreen({super.key});
 
   @override
-  Widget buildWithState(BuildContext context, bloc, state) {
+  State<BookLaundryScreen> createState() => _BookLaundryScreenState();
+}
+
+class _BookLaundryScreenState extends State<BookLaundryScreen> {
+  DateTime pickedDate = DateTime.now().toNextHalf();
+
+  final DateFormat dateFormat = DateFormat("EEE, d MMM");
+
+  @override
+  Widget build(BuildContext context) {
+    BookLaundryState state = context.read<BookLaundryBloc>().state;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(size: 32),
@@ -58,14 +73,26 @@ class BookLaundryScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                 ],
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: ListTile(
                 tileColor: Colors.white,
                 leading: Icon(Icons.calendar_month_outlined),
                 iconColor: Colors.black,
-                title: Text('Thu, 1 Sep'),
-                trailing: Text('10:00'),
+                title: InkWell(
+                  onTap: () => showLaundryTimePicker(
+                    context: context,
+                    initialDate: pickedDate,
+                  ).then((value) {
+                    if (value != null) {
+                      pickedDate = value;
+                      setState(() {});
+                    }
+                  }),
+                  child: Text(dateFormat.format(pickedDate)),
+                ),
+                trailing: Text(
+                    '${pickedDate.hour.toString().padLeft(2, '0')}:${pickedDate.minute.toString().padLeft(2, '0')}'),
               ),
             ),
             StyledDropdownButton(
