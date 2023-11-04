@@ -21,8 +21,12 @@ class BookLaundryScreen extends StatefulWidget {
 
 class _BookLaundryScreenState extends State<BookLaundryScreen> {
   DateTime pickedDate = DateTime.now().toNextHalf();
+  WashType? pickedType;
+  int? pickedTemperature;
 
   final DateFormat dateFormat = DateFormat("EEE, d MMM");
+
+  bool get canBook => pickedType != null && pickedTemperature != null;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +49,7 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Text(
-                  '\$ 0.25/h',
+                  '\$ 0.5/h',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ],
@@ -96,17 +100,37 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
               ),
             ),
             StyledDropdownButton(
-              selectedValue: null,
-              values: [],
-              onChanged: (_) {},
+              selectedValue: pickedType,
+              values: WashType.values
+                  .map((e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(e.label).tr(),
+                      ))
+                  .toList(),
+              onChanged: (type) {
+                if (pickedType != type) {
+                  pickedType = type;
+                  setState(() {});
+                }
+              },
               hintText: 'Choose type of wash',
               margin: const EdgeInsets.symmetric(vertical: 16.0),
               leading: const Icon(Icons.list),
             ),
             StyledDropdownButton(
-              selectedValue: null,
-              values: [],
-              onChanged: (_) {},
+              selectedValue: pickedTemperature,
+              values: getWashTemperatures()
+                  .map((e) => DropdownMenuItem(
+                        value: e,
+                        child: Text('$e °C'),
+                      ))
+                  .toList(),
+              onChanged: (temp) {
+                if (pickedTemperature != temp) {
+                  pickedTemperature = temp;
+                  setState(() {});
+                }
+              },
               hintText: 'Choose temperature',
               margin: const EdgeInsets.symmetric(vertical: 16.0),
               leading: const Icon(Icons.thermostat),
@@ -122,16 +146,53 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   Text(
-                    '\$ 1',
+                    '\$ ${_calculateCost()}',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ],
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: const Center(child: Text('Book machine')))
+            ElevatedButton(
+                onPressed: canBook ? () {} : null,
+                child: const Center(
+                    child: Text(
+                  'Book machine',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                )))
           ],
         ),
       ),
     );
   }
+
+  double _calculateCost() {
+    if (pickedType != null) {
+      return (pickedType!.duration.inMinutes / 60) * 0.5;
+    }
+    return 0;
+  }
+}
+
+enum WashType {
+  fast(Duration(hours: 1), 'washtype_fast'),
+  normal(Duration(hours: 1, minutes: 30), 'washtype_normal'),
+  delicate(Duration(hours: 2), 'washtype_delicate');
+
+  const WashType(this.duration, this.label);
+
+  final Duration duration;
+  final String label;
+}
+
+List<int> getWashTemperatures() {
+  return [
+    30,
+    40,
+    50,
+    60,
+    70,
+  ];
 }
