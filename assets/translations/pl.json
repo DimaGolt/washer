@@ -17,5 +17,8 @@
   "greetings": "Witaj ponownie",
   "active_laundry_title": "Pranie w toku",
   "active_laundry_subtitle": "Kliknij aby sprawdzić!",
-  "active_laundry_text": "Podczas gdy pranie działa swoją magię, dlaczego nie zafundować sobie małej przyjemności? Delektuj się filiżanką ulubionej herbaty lub kawy albo przekąś coś pysznego. Niech to będzie twój osobisty czas na naładowanie baterii i chwile odkrywania siebie."
+  "active_laundry_text": "Podczas gdy pranie działa swoją magię, dlaczego nie zafundować sobie małej przyjemności? Delektuj się filiżanką ulubionej herbaty lub kawy albo przekąś coś pysznego. Niech to będzie twój osobisty czas na naładowanie baterii i chwile odkrywania siebie.",
+  "washtype_fast": "Szybki (1h)",
+  "washtype_normal": "Normalny (1.5h)",
+  "washtype_delicate": "Delikatny (2h)"
 }

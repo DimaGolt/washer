@@ -13,10 +13,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // if (kDebugMode) {
-  //   await FirebaseAuth.instance.useAuthEmulator('192.168.100.8', 9099);
-  // }
-
   runApp(
     EasyLocalization(
       useOnlyLangCode: true,
