@@ -7,6 +7,7 @@ import 'package:washer/feature/forgor_pass/presentation/bloc/forgot_password_cub
 import 'package:washer/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:washer/feature/register/presentation/bloc/register_cubit.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
 import '../feature/book_laundry/presentation/bloc/book_laundry_bloc.dart';
 
 class WasherApp extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:washu/shared/utils/datetime.dart';
+import 'package:washer/shared/utils/datetime.dart';
 
 Future<DateTime?> showLaundryTimePicker({
   required BuildContext context,

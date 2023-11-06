@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:washu/shared/widgets/conditional_builder.dart';
+import 'package:washer/shared/widgets/conditional_builder.dart';
+
+import '../../../../shared/widgets/conditional_builder.dart';
 
 class StyledDropdownButton extends StatelessWidget {
   const StyledDropdownButton({
@@ -30,10 +32,10 @@ class StyledDropdownButton extends StatelessWidget {
         builder: (_, child) => Row(
           children: [
             Container(
-              constraints: BoxConstraints(minWidth: 40, minHeight: 40),
+              constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
               child: leading!,
             ),
-            SizedBox(width: 30),
+            const SizedBox(width: 30),
             Expanded(child: child),
           ],
         ),

@@ -1,15 +1,12 @@
-import 'dart:math';
-
-import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:washu/app/router.dart';
-import 'package:washu/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
-import 'package:washu/shared/utils/datetime.dart';
-import 'package:washu/shared/widgets/laundry_time_picker.dart';
+import 'package:washer/shared/utils/datetime.dart';
 
+import '../../../../app/router.dart';
+import '../../../../shared/widgets/laundry_time_picker.dart';
 import '../bloc/book_laundry_bloc.dart';
+import '../widgets/styled_dropdown_button.dart';
 
 @RoutePage()
 class BookLaundryScreen extends StatefulWidget {

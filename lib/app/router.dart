@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 export 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:washu/feature/book_laundry/presentation/screens/pick_machine_screen.dart';
+import 'package:washer/feature/book_laundry/presentation/screens/pick_machine_screen.dart';
 
 import '../feature/active_laundry/presentation/screens/active_laundry_screen.dart';
 import '../feature/book_laundry/presentation/screens/book_laundry_screen.dart';

@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:washu/shared/domain/entities/dorm_entity.dart';
-import 'package:washu/shared/domain/entities/laundromat_entity.dart';
-import 'package:washu/shared/domain/repositories/db_repository.dart';
 
+import '../../domain/entities/dorm_entity.dart';
 import '../../domain/entities/floor_entity.dart';
+import '../../domain/entities/laundromat_entity.dart';
+import '../../domain/repositories/db_repository.dart';
 
 class MixedDbRepository implements DbRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

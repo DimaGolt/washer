@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:575309658059:android:c39a5fd7e1c1b9d8f0284e",
+        "mobilesdk_app_id": "1:575309658059:android:c9acb093b4ea5ac6f0284e",
         "android_client_info": {
-          "package_name": "com.example.washu"
+          "package_name": "com.example.washer"
         }
       },
       "oauth_client": [

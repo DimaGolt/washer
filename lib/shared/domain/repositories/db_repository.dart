@@ -1,8 +1,7 @@
-import 'package:washu/shared/data/mixed/mixed_db_repository.dart';
-import 'package:washu/shared/domain/entities/laundromat_entity.dart';
-
+import '../../data/mixed/mixed_db_repository.dart';
 import '../entities/dorm_entity.dart';
 import '../entities/floor_entity.dart';
+import '../entities/laundromat_entity.dart';
 
 abstract class DbRepository {
   Future<List<Dorm>> getDorms();
