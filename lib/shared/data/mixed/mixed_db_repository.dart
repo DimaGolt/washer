@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:washer/shared/domain/entities/reservation_entity.dart';
 
 import '../../domain/entities/dorm_entity.dart';
 import '../../domain/entities/floor_entity.dart';
@@ -11,7 +12,7 @@ class MixedDbRepository implements DbRepository {
   @override
   Future<List<Dorm>> getDorms() async {
     var foo = await _db.collection('dorms').get();
-    var foo2 = foo.docs.map((dorm) => Dorm.fromJson(dorm.data())).toList();
+    var foo2 = foo.docs.map((dorm) => Dorm.fromJson(dorm.data(), dorm.reference)).toList();
     return foo2;
   }
 
@@ -19,9 +20,9 @@ class MixedDbRepository implements DbRepository {
   Future<List<Laundromat>> getFloorLaundromats(Floor floor) async {
     Floor parent = floor;
     if (parent.isEmpty) {
-      var json = await floor.selfReference!.get();
+      var json = await floor.selfReference.get();
       if (json.exists) {
-        parent = Floor.fromJson(json.data()!);
+        parent = Floor.fromJson(json.data()!, floor.selfReference);
       } else {
         throw DatabaseException(message: 'Couldn\'t find this floor');
       }
@@ -29,9 +30,9 @@ class MixedDbRepository implements DbRepository {
 
     List<Laundromat> result = [];
     for (Laundromat laundromat in parent.laundromats!) {
-      var json = await laundromat.selfReference!.get();
+      var json = await laundromat.selfReference.get();
       if (json.exists) {
-        Laundromat full = Laundromat.fromJson(json.data()!);
+        Laundromat full = Laundromat.fromJson(json.data()!, laundromat.selfReference);
         result.add(full);
       }
     }
@@ -43,9 +44,9 @@ class MixedDbRepository implements DbRepository {
   Future<List<Floor>> getDormFloors(Dorm dorm) async {
     Dorm parent = dorm;
     if (parent.isEmpty) {
-      var json = await dorm.selfReference!.get();
+      var json = await dorm.selfReference.get();
       if (json.exists) {
-        parent = Dorm.fromJson(json.data()!);
+        parent = Dorm.fromJson(json.data()!, dorm.selfReference);
       } else {
         throw DatabaseException(message: 'Couldn\'t find this dorm');
       }
@@ -53,9 +54,9 @@ class MixedDbRepository implements DbRepository {
 
     List<Floor> result = [];
     for (Floor floor in parent.floors!) {
-      var json = await floor.selfReference!.get();
+      var json = await floor.selfReference.get();
       if (json.exists) {
-        Floor full = Floor.fromJson(json.data()!);
+        Floor full = Floor.fromJson(json.data()!, floor.selfReference);
         result.add(full);
       }
     }
@@ -66,14 +67,33 @@ class MixedDbRepository implements DbRepository {
   @override
   Future<List<Floor>> getFloors() async {
     var foo = await _db.collection('floors').get();
-    var foo2 = foo.docs.map((dorm) => Floor.fromJson(dorm.data())).toList();
+    var foo2 = foo.docs.map((floor) => Floor.fromJson(floor.data(), floor.reference)).toList();
     return foo2;
   }
 
   @override
   Future<List<Laundromat>> getLaundromats() async {
     var foo = await _db.collection('laundromats').get();
-    var foo2 = foo.docs.map((dorm) => Laundromat.fromJson(dorm.data())).toList();
+    var foo2 = foo.docs
+        .map((laundromat) => Laundromat.fromJson(laundromat.data(), laundromat.reference))
+        .toList();
     return foo2;
+  }
+
+  @override
+  Future<List<Reservation>> getReservations() async {
+    var foo = await _db.collection('reservations').get();
+    var foo2 = foo.docs
+        .map((reservation) => Reservation.fromJson(reservation.data(), reservation.reference))
+        .toList();
+    print(foo2.first.toJson().toString());
+    return foo2;
+  }
+
+  @override
+  Future<void> bookReservation(Reservation reservation, String userId) async {
+    if (reservation.isBookable) {
+      await _db.collection('reservations').add(reservation.toJson()..addAll({'userId': userId}));
+    }
   }
 }
