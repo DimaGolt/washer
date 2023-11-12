@@ -44,20 +44,20 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Machine nr. ${state.selectedLaundromat!.number}',
+                  'machine_nr',
                   style: Theme.of(context).textTheme.headlineMedium,
-                ),
+                ).tr(args: [state.selectedLaundromat!.number.toString()]),
                 Text(
                   '\$ 0.5/h',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24.0),
-              child: Text(
-                'To book a washing machine fill the form below. \nProvide time and date and choose program type.',
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              child: const Text(
+                'book_machine_text',
+              ).tr(),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -68,11 +68,11 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Floor ${state.selectedFloor!.level}'),
+                      const Text('floor').tr(args: [state.selectedFloor!.level.toString()]),
                       Text(state.selectedDorm!.name),
                     ],
                   ),
-                  Text('Max weight: 5 kg'),
+                  const Text('max_weight').tr(args: ['5']),
                 ],
               ),
             ),
@@ -112,7 +112,7 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                   setState(() {});
                 }
               },
-              hintText: 'Choose type of wash',
+              hintText: 'wash_type_placeholder'.tr(),
               margin: const EdgeInsets.symmetric(vertical: 16.0),
               leading: const Icon(Icons.list),
             ),
@@ -130,7 +130,7 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                   setState(() {});
                 }
               },
-              hintText: 'Choose temperature',
+              hintText: 'temperature_placeholder'.tr(),
               margin: const EdgeInsets.symmetric(vertical: 16.0),
               leading: const Icon(Icons.thermostat),
             ),
@@ -141,9 +141,9 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Total:',
+                    'total_cost',
                     style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+                  ).tr(),
                   Text(
                     '\$ ${_calculateCost()}',
                     style: Theme.of(context).textTheme.headlineSmall,
@@ -169,17 +169,17 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                             ));
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Reservation added successfully.')));
+                            SnackBar(content: const Text('reservation_success').tr()));
                       }
                     : null,
-                child: const Center(
-                    child: Text(
-                  'Book machine',
+                child: Center(
+                    child: const Text(
+                  'book_button',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                   ),
-                )))
+                ).tr()))
           ],
         ),
       ),

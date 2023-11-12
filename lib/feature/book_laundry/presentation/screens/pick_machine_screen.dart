@@ -1,4 +1,5 @@
 import 'package:bloc_widgets/bloc_widgets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washer/app/router.dart';
 import 'package:washer/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
@@ -20,7 +21,7 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Book Laundry'),
+        title: const Text('book_laundry').tr(),
       ),
       body: Container(
         color: Theme.of(context).primaryColor,
@@ -33,7 +34,7 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                   children: [
                     StyledDropdownButton(
                       selectedValue: state.selectedDorm,
-                      hintText: 'Dorm',
+                      hintText: 'dorm'.tr(),
                       values: state.dorms
                           .map((e) => DropdownMenuItem(
                                 value: e,
@@ -50,12 +51,12 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                     ),
                     StyledDropdownButton(
                       margin: const EdgeInsets.only(top: 8, bottom: 16),
-                      hintText: 'Floor',
+                      hintText: 'floor'.tr(args: ['']),
                       selectedValue: state.selectedFloor,
                       values: state.floors
                           .map((e) => DropdownMenuItem(
                                 value: e,
-                                child: Text('Floor ${e.level}'),
+                                child: const Text('floor').tr(args: [e.level.toString()]),
                               ))
                           .toList(),
                       onChanged: state.selectedDorm != null
@@ -98,7 +99,7 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('Machine nr. ${e.number}'),
+                                const Text('machine_nr').tr(args: [e.number.toString()]),
                                 const Icon(
                                   Icons.local_laundry_service_outlined,
                                   size: 54,
@@ -110,13 +111,13 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(e.dorm!.name),
-                                        Text('Floor ${e.floor!.level}'),
+                                        const Text('floor').tr(args: [e.floor!.level.toString()]),
                                       ],
                                     ),
-                                    const Column(
+                                    Column(
                                       children: [
-                                        Text('Price:'),
-                                        Text(
+                                        const Text('price').tr(),
+                                        const Text(
                                           '\$ 0.25/h',
                                           style: TextStyle(color: Colors.green),
                                         ),

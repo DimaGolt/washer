@@ -20,5 +20,18 @@
   "active_laundry_text": "While the laundry works its magic, why not treat yourself to a small indulgence? Savor a cup of your favorite tea or coffee, or nibble on a delightful snack. Let this be your personal time to recharge and embrace moments of self-discovery.",
   "washtype_fast": "Fast (1h)",
   "washtype_normal": "Normal (1.5h)",
-  "washtype_delicate": "Delicate (2h)"
+  "washtype_delicate": "Delicate (2h)",
+  "machine_nr": "Machine nr. {}",
+  "book_machine_text": "To book a washing machine fill the form below. \nProvide time and date and choose program type.",
+  "floor": "Floor {}",
+  "dorm": "Dorm",
+  "max_weight": "Max weight: {} kg",
+  "wash_type_placeholder": "Choose type of wash",
+  "temperature_placeholder": "Choose temperature",
+  "total_cost": "Total: ",
+  "reservation_success": "Reservation added successfully.",
+  "book_button": "Book machine",
+  "price": "Price: ",
+  "ok": "Ok",
+  "cancel": "Cancel"
 }

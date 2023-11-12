@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washer/shared/utils/datetime.dart';
 
@@ -131,11 +132,11 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
         children: <Widget>[
           TextButton(
             onPressed: _handleCancel,
-            child: Text('Cancel'), //TODO: translate
+            child: const Text('cancel').tr(),
           ),
           TextButton(
             onPressed: _handleOk,
-            child: Text('Ok'), //TODO: translate
+            child: const Text('ok').tr(),
           ),
         ],
       ),
