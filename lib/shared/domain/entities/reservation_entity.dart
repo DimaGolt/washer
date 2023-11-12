@@ -39,10 +39,11 @@ class Reservation {
       price != null &&
       washType != null;
 
-  Reservation.fromJson(Map<String, Object?> json, DocumentReference<Map<String, dynamic>> reference)
+  Reservation.fromJson(
+      Map<String, dynamic>? json, DocumentReference<Map<String, dynamic>> reference)
       : this(
           selfReference: reference,
-          dorm: json['dorm'] != null
+          dorm: json!['dorm'] != null
               ? Dorm.fromJsonSimple(json['dorm'] as Map<String, Object?>)
               : null,
           floor: json['floor'] != null
