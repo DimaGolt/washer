@@ -167,6 +167,9 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                               ),
                               context.read<AuthRepository>().user!.uid,
                             ));
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Reservation added successfully.')));
                       }
                     : null,
                 child: const Center(
