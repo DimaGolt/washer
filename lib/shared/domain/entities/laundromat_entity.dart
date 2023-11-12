@@ -4,13 +4,13 @@ import 'floor_entity.dart';
 import 'dorm_entity.dart';
 
 class Laundromat {
-  final DocumentReference<Map<String, dynamic>>? selfReference;
+  final DocumentReference<Map<String, dynamic>> selfReference;
   final Dorm? dorm;
   final Floor? floor;
   final int? number;
 
   Laundromat({
-    this.selfReference,
+    required this.selfReference,
     this.dorm,
     this.floor,
     this.number,
@@ -18,12 +18,21 @@ class Laundromat {
 
   bool get isEmpty => floor == null && dorm == null && selfReference != null;
 
-  Laundromat.fromJson(Map<String, Object?> json)
+  Laundromat.fromJson(Map<String, Object?> json, DocumentReference<Map<String, dynamic>> reference)
       : this(
-          selfReference: json['selfReference'] as DocumentReference<Map<String, dynamic>>?,
-          dorm: json['dorm'] != null ? Dorm.fromJson(json['dorm']! as Map<String, Object?>) : null,
-          floor:
-              json['floor'] != null ? Floor.fromJson(json['floor']! as Map<String, Object?>) : null,
+          selfReference: reference,
+          dorm: json['dorm'] != null
+              ? Dorm.fromJsonSimple(json['dorm']! as Map<String, Object?>)
+              : null,
+          floor: json['floor'] != null
+              ? Floor.fromJsonSimple(json['floor']! as Map<String, Object?>)
+              : null,
+          number: json['number'] as int?,
+        );
+
+  Laundromat.fromJsonSimple(Map<String, Object?> json)
+      : this(
+          selfReference: json['selfReference'] as DocumentReference<Map<String, dynamic>>,
           number: json['number'] as int?,
         );
 
@@ -31,8 +40,14 @@ class Laundromat {
     return {
       if (dorm != null) 'dorm': dorm?.toJson(),
       if (floor != null) 'floor': floor?.toJson(),
-      if (selfReference != null) 'selfReference': selfReference,
+      if (isEmpty) 'selfReference': selfReference,
       if (number != null) 'number': number,
+    };
+  }
+
+  Map<String, Object?> toSimpleJson() {
+    return {
+      'selfReference': selfReference,
     };
   }
 

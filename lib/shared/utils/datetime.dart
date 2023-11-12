@@ -32,6 +32,12 @@ extension MyDateUtils on DateTime {
     } else {
       returnable = this;
     }
+
+    if (hour >= 21) {
+      returnable = copyWith(day: day + 1, hour: 7, minute: 0);
+    } else if (hour < 7) {
+      returnable = copyWith(hour: 7, minute: 0);
+    }
     return returnable;
   }
 }
@@ -42,36 +48,36 @@ extension DateListUtils on List<DateTime> {
   }
 }
 
-List<DateTime> generateTimes() {
+List<DateTime> generateTimes(DateTime initialDate) {
   return [
-    DateTime.now().copyWith(hour: 7, minute: 00),
-    DateTime.now().copyWith(hour: 7, minute: 30),
-    DateTime.now().copyWith(hour: 8, minute: 00),
-    DateTime.now().copyWith(hour: 8, minute: 30),
-    DateTime.now().copyWith(hour: 9, minute: 00),
-    DateTime.now().copyWith(hour: 9, minute: 30),
-    DateTime.now().copyWith(hour: 10, minute: 00),
-    DateTime.now().copyWith(hour: 10, minute: 30),
-    DateTime.now().copyWith(hour: 11, minute: 00),
-    DateTime.now().copyWith(hour: 11, minute: 30),
-    DateTime.now().copyWith(hour: 12, minute: 00),
-    DateTime.now().copyWith(hour: 12, minute: 30),
-    DateTime.now().copyWith(hour: 13, minute: 00),
-    DateTime.now().copyWith(hour: 13, minute: 30),
-    DateTime.now().copyWith(hour: 14, minute: 00),
-    DateTime.now().copyWith(hour: 14, minute: 30),
-    DateTime.now().copyWith(hour: 15, minute: 00),
-    DateTime.now().copyWith(hour: 15, minute: 30),
-    DateTime.now().copyWith(hour: 16, minute: 00),
-    DateTime.now().copyWith(hour: 16, minute: 30),
-    DateTime.now().copyWith(hour: 17, minute: 00),
-    DateTime.now().copyWith(hour: 17, minute: 30),
-    DateTime.now().copyWith(hour: 18, minute: 00),
-    DateTime.now().copyWith(hour: 18, minute: 30),
-    DateTime.now().copyWith(hour: 19, minute: 00),
-    DateTime.now().copyWith(hour: 19, minute: 30),
-    DateTime.now().copyWith(hour: 20, minute: 00),
-    DateTime.now().copyWith(hour: 20, minute: 30),
-    DateTime.now().copyWith(hour: 21, minute: 00),
+    initialDate.copyWith(hour: 7, minute: 00),
+    initialDate.copyWith(hour: 7, minute: 30),
+    initialDate.copyWith(hour: 8, minute: 00),
+    initialDate.copyWith(hour: 8, minute: 30),
+    initialDate.copyWith(hour: 9, minute: 00),
+    initialDate.copyWith(hour: 9, minute: 30),
+    initialDate.copyWith(hour: 10, minute: 00),
+    initialDate.copyWith(hour: 10, minute: 30),
+    initialDate.copyWith(hour: 11, minute: 00),
+    initialDate.copyWith(hour: 11, minute: 30),
+    initialDate.copyWith(hour: 12, minute: 00),
+    initialDate.copyWith(hour: 12, minute: 30),
+    initialDate.copyWith(hour: 13, minute: 00),
+    initialDate.copyWith(hour: 13, minute: 30),
+    initialDate.copyWith(hour: 14, minute: 00),
+    initialDate.copyWith(hour: 14, minute: 30),
+    initialDate.copyWith(hour: 15, minute: 00),
+    initialDate.copyWith(hour: 15, minute: 30),
+    initialDate.copyWith(hour: 16, minute: 00),
+    initialDate.copyWith(hour: 16, minute: 30),
+    initialDate.copyWith(hour: 17, minute: 00),
+    initialDate.copyWith(hour: 17, minute: 30),
+    initialDate.copyWith(hour: 18, minute: 00),
+    initialDate.copyWith(hour: 18, minute: 30),
+    initialDate.copyWith(hour: 19, minute: 00),
+    initialDate.copyWith(hour: 19, minute: 30),
+    initialDate.copyWith(hour: 20, minute: 00),
+    initialDate.copyWith(hour: 20, minute: 30),
+    initialDate.copyWith(hour: 21, minute: 00),
   ];
 }

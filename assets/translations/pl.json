@@ -20,5 +20,18 @@
   "active_laundry_text": "Podczas gdy pranie działa swoją magię, dlaczego nie zafundować sobie małej przyjemności? Delektuj się filiżanką ulubionej herbaty lub kawy albo przekąś coś pysznego. Niech to będzie twój osobisty czas na naładowanie baterii i chwile odkrywania siebie.",
   "washtype_fast": "Szybki (1h)",
   "washtype_normal": "Normalny (1.5h)",
-  "washtype_delicate": "Delikatny (2h)"
+  "washtype_delicate": "Delikatny (2h)",
+  "machine_nr": "Pralka nr. {}",
+  "book_machine_text": "Aby zarezerwować pralkę, wypełnij poniższy formularz. \nPodaj godzinę i datę oraz wybierz typ programu.",
+  "floor": "Piętro {}",
+  "dorm": "Akademik",
+  "max_weight": "Maksymalna waga: {} kg",
+  "wash_type_placeholder": "Wybierz typ programu",
+  "temperature_placeholder": "Wybierz temperaturę",
+  "total_cost": "Razem: ",
+  "reservation_success": "Rezerwacja dodana pomyślnie",
+  "book_button": "Zarezerwuj pralkę",
+  "price": "Cena: ",
+  "ok": "Ok",
+  "cancel": "Anuluj"
 }

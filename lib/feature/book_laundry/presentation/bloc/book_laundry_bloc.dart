@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:washer/shared/domain/entities/reservation_entity.dart';
 
 import '../../../../shared/domain/entities/dorm_entity.dart';
 import '../../../../shared/domain/entities/floor_entity.dart';
@@ -20,6 +21,7 @@ class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
     on<BookLaundryPickDorm>(_fetchFloors);
     on<BookLaundryPickFloor>(_fetchLaundromats);
     on<BookLaundryPickMachine>(_setMachine);
+    on<BookLaundryReservation>(_bookReservation);
   }
 
   _fetchDorms(BookLaundryStart event, Emitter<BookLaundryState> emit) async {
@@ -55,5 +57,13 @@ class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
       selectedFloor: state.selectedFloor,
       selectedLaundromat: event.laundromat,
     ));
+  }
+
+  fetchReservations() {
+    dbRepository.getReservations();
+  }
+
+  _bookReservation(BookLaundryReservation event, Emitter<BookLaundryState> emit) {
+    dbRepository.bookReservation(event.reservation, event.userId);
   }
 }
