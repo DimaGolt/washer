@@ -5,7 +5,7 @@ import 'floor_entity.dart';
 import 'laundromat_entity.dart';
 
 class Reservation {
-  final DocumentReference<Map<String, dynamic>>? selfReference;
+  DocumentReference<Map<String, dynamic>>? selfReference;
   final Dorm? dorm;
   final Floor? floor;
   final Laundromat? laundromat;
@@ -88,6 +88,12 @@ class Reservation {
       if (temperature != null) 'temperature': temperature,
       if (price != null) 'price': price,
       if (washType != null) 'washType': washType,
+    };
+  }
+
+  Map<String, Object?> toSimpleJson() {
+    return {
+      'selfReference': selfReference,
     };
   }
 

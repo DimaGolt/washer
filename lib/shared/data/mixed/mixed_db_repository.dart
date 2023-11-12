@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:washer/shared/domain/entities/fire_user_entity.dart';
 import 'package:washer/shared/domain/entities/reservation_entity.dart';
 
 import '../../domain/entities/dorm_entity.dart';
@@ -93,7 +94,15 @@ class MixedDbRepository implements DbRepository {
   @override
   Future<void> bookReservation(Reservation reservation, String userId) async {
     if (reservation.isBookable) {
-      await _db.collection('reservations').add(reservation.toJson()..addAll({'userId': userId}));
+      DocumentReference<Map<String, dynamic>> reference = await _db
+          .collection('reservations')
+          .add(reservation.toJson()..addAll({'userId': userId}));
+      reservation.selfReference = reference;
+      DocumentSnapshot<Map<String, dynamic>> result =
+          await _db.collection('users').doc(userId).get();
+      FireUser user = FireUser.fromJson(result.data(), userId);
+      user.reservations.add(reservation);
+      result.reference.update(user.toJson());
     }
   }
 }

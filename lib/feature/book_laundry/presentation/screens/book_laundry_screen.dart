@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:washer/shared/domain/entities/reservation_entity.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:washer/shared/utils/datetime.dart';
 
 import '../../../../app/router.dart';
@@ -150,7 +152,23 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
               ),
             ),
             ElevatedButton(
-                onPressed: canBook ? () {} : null,
+                onPressed: canBook
+                    ? () {
+                        context.read<BookLaundryBloc>().add(BookLaundryReservation(
+                              Reservation(
+                                dorm: state.selectedDorm,
+                                floor: state.selectedFloor,
+                                laundromat: state.selectedLaundromat,
+                                start: pickedDate,
+                                end: pickedDate.add(pickedType!.duration),
+                                temperature: pickedTemperature!,
+                                price: _calculateCost(),
+                                washType: pickedType!.label,
+                              ),
+                              context.read<AuthRepository>().user!.uid,
+                            ));
+                      }
+                    : null,
                 child: const Center(
                     child: Text(
                   'Book machine',

@@ -35,3 +35,13 @@ class BookLaundryPickMachine extends BookLaundryEvent {
   @override
   List<Object?> get props => [laundromat];
 }
+
+class BookLaundryReservation extends BookLaundryEvent {
+  final Reservation reservation;
+  final String userId;
+
+  const BookLaundryReservation(this.reservation, this.userId);
+
+  @override
+  List<Object?> get props => [reservation, userId];
+}
