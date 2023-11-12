@@ -23,7 +23,7 @@ class LaundryTimePicker extends StatefulWidget {
 }
 
 class _LaundryTimePickerState extends State<LaundryTimePicker> {
-  List<DateTime> times = generateTimes();
+  late List<DateTime> times = generateTimes(widget.initialDate);
 
   final ScrollController _controller = ScrollController();
 
