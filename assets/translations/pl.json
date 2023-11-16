@@ -33,5 +33,9 @@
   "book_button": "Zarezerwuj pralkę",
   "price": "Cena: ",
   "ok": "Ok",
-  "cancel": "Anuluj"
+  "cancel": "Anuluj",
+  "my_reservations": "Moje rezerwacje",
+  "place": "Miejsce: {} Piętro {}",
+  "time": "Czas: {}",
+  "cancel_booking": "Anuluj rezerwację"
 }

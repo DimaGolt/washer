@@ -102,4 +102,23 @@ class Reservation {
   String toString() {
     return 'Reservation';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Reservation &&
+          runtimeType == other.runtimeType &&
+          selfReference == other.selfReference;
+
+  @override
+  int get hashCode =>
+      selfReference.hashCode ^
+      dorm.hashCode ^
+      floor.hashCode ^
+      laundromat.hashCode ^
+      start.hashCode ^
+      end.hashCode ^
+      temperature.hashCode ^
+      price.hashCode ^
+      washType.hashCode;
 }
