@@ -42,15 +42,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 
   _deleteReservations(Reservation reservation) async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
     await context
         .read<DbRepository>()
         .deleteReservation(reservation, context.read<AuthRepository>().user!.uid);
-    // setState(() {
-    //   _isLoading = false;
-    // });
   }
 
   @override
