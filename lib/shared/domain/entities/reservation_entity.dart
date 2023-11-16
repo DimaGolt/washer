@@ -39,10 +39,11 @@ class Reservation {
       price != null &&
       washType != null;
 
-  Reservation.fromJson(Map<String, Object?> json, DocumentReference<Map<String, dynamic>> reference)
+  Reservation.fromJson(
+      Map<String, dynamic>? json, DocumentReference<Map<String, dynamic>> reference)
       : this(
           selfReference: reference,
-          dorm: json['dorm'] != null
+          dorm: json!['dorm'] != null
               ? Dorm.fromJsonSimple(json['dorm'] as Map<String, Object?>)
               : null,
           floor: json['floor'] != null
@@ -101,4 +102,23 @@ class Reservation {
   String toString() {
     return 'Reservation';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Reservation &&
+          runtimeType == other.runtimeType &&
+          selfReference == other.selfReference;
+
+  @override
+  int get hashCode =>
+      selfReference.hashCode ^
+      dorm.hashCode ^
+      floor.hashCode ^
+      laundromat.hashCode ^
+      start.hashCode ^
+      end.hashCode ^
+      temperature.hashCode ^
+      price.hashCode ^
+      washType.hashCode;
 }

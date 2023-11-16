@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                               position: TilePosition.upRight,
                             ),
                             MenuTile(
-                              onTap: () {},
+                              onTap: context.router.showReservations,
                               icon: FontAwesomeIcons.solidCalendarDays,
                               label: 'check_bookings'.tr(),
                               position: TilePosition.downLeft,

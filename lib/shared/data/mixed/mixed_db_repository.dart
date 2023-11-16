@@ -105,4 +105,28 @@ class MixedDbRepository implements DbRepository {
       result.reference.update(user.toJson());
     }
   }
+
+  @override
+  Future<void> deleteReservation(Reservation reservation, String userId) async {
+    reservation.selfReference?.delete();
+    DocumentSnapshot<Map<String, dynamic>> result = await _db.collection('users').doc(userId).get();
+    FireUser user = FireUser.fromJson(result.data(), userId);
+    user.reservations.removeWhere((element) => element == reservation);
+    result.reference.update(user.toJson());
+  }
+
+  @override
+  Future<List<Reservation>> getUserReservations(String userId) async {
+    DocumentSnapshot<Map<String, dynamic>> userDoc =
+        await _db.collection('users').doc(userId).get();
+
+    FireUser user = FireUser.fromJson(userDoc.data(), userId);
+    List<Reservation> reservations = [];
+    for (Reservation e in user.reservations) {
+      var result = await e.selfReference!.get();
+      Reservation reservation = Reservation.fromJson(result.data(), result.reference);
+      reservations.add(reservation);
+    }
+    return reservations;
+  }
 }

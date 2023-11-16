@@ -11,6 +11,7 @@ import '../feature/home/presentation/screens/home_screen.dart';
 import '../feature/landing/presentation/screens/landing_screen.dart';
 import '../feature/login/presentation/screens/login_screen.dart';
 import '../feature/register/presentation/screens/register_screen.dart';
+import '../feature/reservations/presentation/screens/reservations_screen.dart';
 
 part 'router.gr.dart';
 
@@ -27,6 +28,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ActiveLaundryRoute.page),
         AutoRoute(page: PickMachineRoute.page),
         AutoRoute(page: BookLaundryRoute.page),
+        AutoRoute(page: ReservationsRoute.page),
       ];
 }
 
@@ -48,4 +50,6 @@ extension RouterExtension on StackRouter {
   Future showPickMachine() => push(const PickMachineRoute());
 
   Future showBookLaundry() => push(const BookLaundryRoute());
+
+  Future showReservations() => push(const ReservationsRoute());
 }

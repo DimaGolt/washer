@@ -47,6 +47,7 @@ class Laundromat {
 
   Map<String, Object?> toSimpleJson() {
     return {
+      'number': number,
       'selfReference': selfReference,
     };
   }

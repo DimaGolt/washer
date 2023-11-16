@@ -33,5 +33,9 @@
   "book_button": "Book machine",
   "price": "Price: ",
   "ok": "Ok",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "my_reservations": "My reservations",
+  "place": "Place: {} Floor {}",
+  "time": "Time: {}",
+  "cancel_booking": "Cancel booking"
 }
