@@ -8,7 +8,7 @@ import 'package:washer/shared/utils/datetime.dart';
 import '../../../../app/router.dart';
 import '../../../../shared/widgets/laundry_time_picker.dart';
 import '../bloc/book_laundry_bloc.dart';
-import '../widgets/styled_dropdown_button.dart';
+import '../../../../shared/widgets/styled_dropdown_button.dart';
 
 @RoutePage()
 class BookLaundryScreen extends StatefulWidget {

@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                               position: TilePosition.upLeft,
                             ),
                             MenuTile(
-                              onTap: () {},
+                              onTap: context.router.showReport,
                               icon: FontAwesomeIcons.solidFlag,
                               label: 'report_machine'.tr(),
                               position: TilePosition.upRight,

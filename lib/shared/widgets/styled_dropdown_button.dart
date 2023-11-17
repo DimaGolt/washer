@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:washer/shared/widgets/conditional_builder.dart';
 
-import '../../../../shared/widgets/conditional_builder.dart';
+import 'conditional_builder.dart';
 
 class StyledDropdownButton extends StatelessWidget {
   const StyledDropdownButton({
