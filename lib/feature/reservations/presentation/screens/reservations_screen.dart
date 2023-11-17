@@ -116,7 +116,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('place').tr(args: [
+                                  const Text('full_place').tr(args: [
                                     _reservations[ind].dorm!.name,
                                     _reservations[ind].floor!.level.toString()
                                   ]),

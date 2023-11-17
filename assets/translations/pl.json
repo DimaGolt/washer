@@ -35,7 +35,12 @@
   "ok": "Ok",
   "cancel": "Anuluj",
   "my_reservations": "Moje rezerwacje",
-  "place": "Miejsce: {} Piętro {}",
+  "full_place": "Miejsce: {} Piętro {}",
+  "place": "Miejsce: ",
   "time": "Czas: {}",
-  "cancel_booking": "Anuluj rezerwację"
+  "cancel_booking": "Anuluj rezerwację",
+  "what_broke": "Co zepsuło się: ",
+  "not_sure": "Nie jestem pewien/na",
+  "describe_issue": "Opisz co się stało",
+  "report": "Zgłoś"
 }

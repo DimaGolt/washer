@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washer/app/router.dart';
 import 'package:washer/shared/widgets/appbar_wave.dart';
@@ -25,7 +26,7 @@ class _ReportScreenState extends State<ReportScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const AppBarWave(
-        title: 'Report machine',
+        title: 'report_machine',
       ),
       floatingActionButton: _fab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -36,9 +37,9 @@ class _ReportScreenState extends State<ReportScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Place:',
+                'place',
                 style: TextStyle(color: theme.primaryColor, fontSize: 32),
-              ),
+              ).tr(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 17.0),
                 child: Card(
@@ -63,7 +64,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               setState(() {});
                             }
                           },
-                          hintText: 'Choose dorm',
+                          hintText: 'choose_dorm'.tr(),
                           isPrimary: true,
                         ),
                         StyledDropdownButton(
@@ -80,7 +81,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               setState(() {});
                             }
                           },
-                          hintText: 'Choose floor',
+                          hintText: 'choose_floor'.tr(),
                           isPrimary: true,
                         ),
                         Padding(
@@ -88,7 +89,13 @@ class _ReportScreenState extends State<ReportScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Machine nr.: '),
+                              Text(
+                                'machine_nr',
+                                style: TextStyle(
+                                  color: theme.primaryColor,
+                                  fontSize: 24,
+                                ),
+                              ).tr(args: ['']),
                               Container(
                                 height: 42,
                                 width: 120,
@@ -117,9 +124,9 @@ class _ReportScreenState extends State<ReportScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                  'What\'s wrong:',
+                  'what_broke',
                   style: TextStyle(color: theme.primaryColor, fontSize: 24),
-                ),
+                ).tr(),
               ),
               Card(
                 shape: RoundedRectangleBorder(
@@ -146,8 +153,9 @@ class _ReportScreenState extends State<ReportScreen> {
                                 }),
                           ),
                           Text(
-                            'I\'m not sure',
-                          ),
+                            'not_sure',
+                            style: TextStyle(color: theme.primaryColor, fontSize: 20),
+                          ).tr(),
                         ],
                       ),
                       Container(
@@ -168,7 +176,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               enabledBorder: InputBorder.none,
                               errorBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
-                              hintText: 'Write what happened',
+                              hintText: 'describe_issue'.tr(),
                               hintStyle: TextStyle(
                                   color: enableDescription
                                       ? theme.primaryColor

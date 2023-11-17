@@ -24,7 +24,9 @@
   "machine_nr": "Machine nr. {}",
   "book_machine_text": "To book a washing machine fill the form below. \nProvide time and date and choose program type.",
   "floor": "Floor {}",
+  "choose_floor": "Choose floor",
   "dorm": "Dorm",
+  "choose_dorm": "Choose dorm",
   "max_weight": "Max weight: {} kg",
   "wash_type_placeholder": "Choose type of wash",
   "temperature_placeholder": "Choose temperature",
@@ -35,7 +37,12 @@
   "ok": "Ok",
   "cancel": "Cancel",
   "my_reservations": "My reservations",
-  "place": "Place: {} Floor {}",
+  "full_place": "Place: {} Floor {}",
+  "place": "Place: ",
   "time": "Time: {}",
-  "cancel_booking": "Cancel booking"
+  "cancel_booking": "Cancel booking",
+  "what_broke": "What's wrong: ",
+  "not_sure": "I'm not sure",
+  "describe_issue": "Write what happened",
+  "report": "Report"
 }
