@@ -64,6 +64,7 @@ class _ReportScreenState extends State<ReportScreen> {
                             }
                           },
                           hintText: 'Choose dorm',
+                          isPrimary: true,
                         ),
                         StyledDropdownButton(
                           selectedValue: _pickedItem,
@@ -79,7 +80,8 @@ class _ReportScreenState extends State<ReportScreen> {
                               setState(() {});
                             }
                           },
-                          hintText: 'Choose dorm',
+                          hintText: 'Choose floor',
+                          isPrimary: true,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4),

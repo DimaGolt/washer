@@ -12,6 +12,7 @@ class StyledDropdownButton extends StatelessWidget {
     required this.hintText,
     this.margin,
     this.leading,
+    this.isPrimary = false,
   });
 
   final dynamic selectedValue;
@@ -20,9 +21,12 @@ class StyledDropdownButton extends StatelessWidget {
   final String hintText;
   final EdgeInsets? margin;
   final Widget? leading;
+  final bool isPrimary;
 
   @override
   Widget build(BuildContext context) {
+    var primaryColor = Theme.of(context).primaryColor;
+
     return Container(
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.all(4),
@@ -43,12 +47,18 @@ class StyledDropdownButton extends StatelessWidget {
           isExpanded: true,
           focusColor: Colors.red,
           value: selectedValue,
-          hint: Text(hintText),
+          hint: Text(
+            hintText,
+            style: TextStyle(
+              color: isPrimary ? primaryColor : null,
+              fontSize: isPrimary ? 24 : null,
+            ),
+          ),
           icon: const Icon(Icons.expand_more),
           iconSize: 32,
           iconDisabledColor: Colors.grey,
-          iconEnabledColor: Colors.black,
-          underline: const SizedBox(),
+          iconEnabledColor: isPrimary ? primaryColor : Colors.black,
+          underline: isPrimary ? Container(height: 1, color: primaryColor) : const SizedBox(),
           items: values,
           onChanged: onChanged,
         ),
