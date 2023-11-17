@@ -131,14 +131,23 @@ class _ReportScreenState extends State<ReportScreen> {
                     children: [
                       Row(
                         children: [
-                          Checkbox(
-                              value: !enableDescription,
-                              onChanged: (_) {
-                                setState(() {
-                                  enableDescription = !enableDescription;
-                                });
-                              }),
-                          const Text('I\'m not sure'),
+                          Transform.scale(
+                            scale: 1.5,
+                            child: Checkbox(
+                                value: !enableDescription,
+                                side: MaterialStateBorderSide.resolveWith(
+                                  (states) => BorderSide(width: 1.0, color: theme.primaryColor),
+                                ),
+                                shape: const CircleBorder(),
+                                onChanged: (_) {
+                                  setState(() {
+                                    enableDescription = !enableDescription;
+                                  });
+                                }),
+                          ),
+                          Text(
+                            'I\'m not sure',
+                          ),
                         ],
                       ),
                       Container(
