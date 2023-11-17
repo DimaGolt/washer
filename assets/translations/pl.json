@@ -44,5 +44,6 @@
   "what_broke": "Co zepsuło się: ",
   "not_sure": "Nie jestem pewien/na",
   "describe_issue": "Opisz co się stało",
-  "report": "Zgłoś"
+  "report": "Zgłoś",
+  "report_success": "Zgłoszenie wysłano pomyślnie"
 }

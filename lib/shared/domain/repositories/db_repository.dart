@@ -1,5 +1,6 @@
 import 'package:washer/shared/domain/entities/reservation_entity.dart';
 
+import '../../../feature/report/domain/entities/report.dart';
 import '../../data/mixed/mixed_db_repository.dart';
 import '../entities/dorm_entity.dart';
 import '../entities/floor_entity.dart';
@@ -15,6 +16,7 @@ abstract class DbRepository {
   Future<void> bookReservation(Reservation reservation, String userId);
   Future<void> deleteReservation(Reservation reservation, String userId);
   Future<List<Reservation>> getUserReservations(String userId);
+  Future<void> sendReport(Report reservation, String userId);
 
   static DbRepository build() => MixedDbRepository();
 }

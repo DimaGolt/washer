@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:washer/feature/forgor_pass/presentation/bloc/forgot_password_cubit.dart';
 import 'package:washer/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:washer/feature/register/presentation/bloc/register_cubit.dart';
+import 'package:washer/feature/report/presentation/bloc/report_bloc.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:washer/shared/domain/repositories/db_repository.dart';
 import '../feature/book_laundry/presentation/bloc/book_laundry_bloc.dart';
@@ -28,6 +29,7 @@ class WasherApp extends StatelessWidget {
         BlocProvider(create: (_) => RegisterCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => ForgotPasswordCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => BookLaundryBloc(dbRepository: dbRepository)),
+        BlocProvider(create: (_) => ReportBloc(dbRepository: dbRepository)),
       ],
       child: MaterialApp.router(
         title: 'Washer',

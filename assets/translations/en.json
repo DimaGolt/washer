@@ -44,5 +44,6 @@
   "what_broke": "What's wrong: ",
   "not_sure": "I'm not sure",
   "describe_issue": "Write what happened",
-  "report": "Report"
+  "report": "Report",
+  "report_success": "Report sent successfully"
 }

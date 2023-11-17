@@ -1,26 +1,28 @@
+import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:washer/app/router.dart';
+import 'package:washer/feature/report/domain/entities/report.dart';
+import 'package:washer/feature/report/presentation/bloc/report_bloc.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:washer/shared/widgets/appbar_wave.dart';
 import 'package:washer/shared/widgets/washer_scroll_view.dart';
 
 import '../../../../shared/widgets/styled_dropdown_button.dart';
 
 @RoutePage()
-class ReportScreen extends StatefulWidget {
+class ReportScreen extends BlocConsumerWidget<ReportBloc, ReportState> {
   const ReportScreen({super.key});
 
   @override
-  State<ReportScreen> createState() => _ReportScreenState();
-}
-
-class _ReportScreenState extends State<ReportScreen> {
-  bool enableDescription = true;
-  String? _pickedItem;
-  List<String> _items = ['woo', 'waa', 'wee'];
+  void onMount(ReportBloc bloc) {
+    super.onMount(bloc);
+    bloc.add(ReportStart());
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildWithState(context, bloc, state) {
     var theme = Theme.of(context);
 
     return Scaffold(
@@ -28,7 +30,7 @@ class _ReportScreenState extends State<ReportScreen> {
       appBar: const AppBarWave(
         title: 'report_machine',
       ),
-      floatingActionButton: _fab(),
+      floatingActionButton: _fab(context, bloc, state),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: WasherScrollView(
         child: Padding(
@@ -51,36 +53,38 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: Column(
                       children: [
                         StyledDropdownButton(
-                          selectedValue: _pickedItem,
-                          values: _items
+                          selectedValue: state.selectedDorm,
+                          values: state.dorms
                               .map((e) => DropdownMenuItem(
                                     value: e,
-                                    child: Text(e),
+                                    child: Text(e.name),
                                   ))
                               .toList(),
-                          onChanged: (type) {
-                            if (_pickedItem != type) {
-                              _pickedItem = type;
-                              setState(() {});
-                            }
-                          },
+                          onChanged: state.status != ReportStatus.initial
+                              ? (val) {
+                                  if (val != null && val != state.selectedDorm) {
+                                    bloc.add(ReportPickDorm(val));
+                                  }
+                                }
+                              : null,
                           hintText: 'choose_dorm'.tr(),
                           isPrimary: true,
                         ),
                         StyledDropdownButton(
-                          selectedValue: _pickedItem,
-                          values: _items
+                          selectedValue: state.selectedFloor,
+                          values: state.floors
                               .map((e) => DropdownMenuItem(
                                     value: e,
-                                    child: Text(e),
+                                    child: const Text('floor').tr(args: [e.level.toString()]),
                                   ))
                               .toList(),
-                          onChanged: (type) {
-                            if (_pickedItem != type) {
-                              _pickedItem = type;
-                              setState(() {});
-                            }
-                          },
+                          onChanged: state.selectedDorm != null
+                              ? (val) {
+                                  if (val != null && val != state.selectedFloor) {
+                                    bloc.add(ReportPickFloor(val));
+                                  }
+                                }
+                              : null,
                           hintText: 'choose_floor'.tr(),
                           isPrimary: true,
                         ),
@@ -102,17 +106,36 @@ class _ReportScreenState extends State<ReportScreen> {
                                 decoration: BoxDecoration(
                                   boxShadow: const [
                                     BoxShadow(
-                                      color: Color(0xFFA3A3A3),
+                                      color: Color(0x7FA3A3A3),
                                     ),
                                     BoxShadow(
-                                        color: Color(0xFFD9D9D9),
+                                        color: Colors.white,
                                         blurRadius: 10,
                                         spreadRadius: -1,
                                         blurStyle: BlurStyle.inner),
                                   ],
                                   borderRadius: BorderRadius.circular(16),
                                 ),
-                              )
+                                child: StyledDropdownButton(
+                                  selectedValue: state.selectedLaundromat,
+                                  values: state.laundromats
+                                      .map((e) => DropdownMenuItem(
+                                            value: e,
+                                            child: Text(e.number!.toString()),
+                                          ))
+                                      .toList(),
+                                  onChanged: state.selectedFloor != null
+                                      ? (val) {
+                                          if (val != null && val != state.selectedLaundromat) {
+                                            bloc.add(ReportPickMachine(val));
+                                          }
+                                        }
+                                      : null,
+                                  hintText: '',
+                                  isExpanded: false,
+                                  isTransparent: true,
+                                ),
+                              ),
                             ],
                           ),
                         )
@@ -141,15 +164,13 @@ class _ReportScreenState extends State<ReportScreen> {
                           Transform.scale(
                             scale: 1.5,
                             child: Checkbox(
-                                value: !enableDescription,
+                                value: !state.descriptionEnabled,
                                 side: MaterialStateBorderSide.resolveWith(
                                   (states) => BorderSide(width: 1.0, color: theme.primaryColor),
                                 ),
                                 shape: const CircleBorder(),
                                 onChanged: (_) {
-                                  setState(() {
-                                    enableDescription = !enableDescription;
-                                  });
+                                  bloc.add(const ReportSwitchDesc());
                                 }),
                           ),
                           Text(
@@ -161,15 +182,19 @@ class _ReportScreenState extends State<ReportScreen> {
                       Container(
                         height: 320,
                         decoration: BoxDecoration(
-                          color:
-                              enableDescription ? const Color(0xBAEBEBEB) : const Color(0xBAEBEBEB),
+                          color: state.descriptionEnabled
+                              ? const Color(0xBAEBEBEB)
+                              : const Color(0xBAEBEBEB),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         padding: const EdgeInsets.all(16),
                         child: TextField(
                           maxLines: null,
                           expands: true,
-                          enabled: enableDescription,
+                          enabled: state.descriptionEnabled,
+                          onChanged: (val) {
+                            bloc.add(ReportUpdateDescription(val));
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -178,7 +203,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               disabledBorder: InputBorder.none,
                               hintText: 'describe_issue'.tr(),
                               hintStyle: TextStyle(
-                                  color: enableDescription
+                                  color: state.descriptionEnabled
                                       ? theme.primaryColor
                                       : const Color(0x4A6896AD))),
                         ),
@@ -194,12 +219,24 @@ class _ReportScreenState extends State<ReportScreen> {
     );
   }
 
-  _fab() => Padding(
+  _fab(BuildContext context, ReportBloc bloc, ReportState state) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
         child: Container(
           constraints: const BoxConstraints(minWidth: double.infinity, maxHeight: 58),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: state.readyToReport
+                ? () {
+                    bloc.add(ReportSend(
+                        Report(
+                            laundromat: state.selectedLaundromat!,
+                            description: state.description,
+                            timestamp: DateTime.now()),
+                        context.read<AuthRepository>().user!.uid));
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: const Text('report_success').tr()));
+                  }
+                : null,
             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF86666)),
             child: Center(
               child: const Text(
