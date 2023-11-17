@@ -24,7 +24,9 @@
   "machine_nr": "Pralka nr. {}",
   "book_machine_text": "Aby zarezerwować pralkę, wypełnij poniższy formularz. \nPodaj godzinę i datę oraz wybierz typ programu.",
   "floor": "Piętro {}",
+  "choose_floor": "Wybierz piętro",
   "dorm": "Akademik",
+  "choose_dorm": "Wybierz akademik",
   "max_weight": "Maksymalna waga: {} kg",
   "wash_type_placeholder": "Wybierz typ programu",
   "temperature_placeholder": "Wybierz temperaturę",
@@ -35,7 +37,13 @@
   "ok": "Ok",
   "cancel": "Anuluj",
   "my_reservations": "Moje rezerwacje",
-  "place": "Miejsce: {} Piętro {}",
+  "full_place": "Miejsce: {} Piętro {}",
+  "place": "Miejsce: ",
   "time": "Czas: {}",
-  "cancel_booking": "Anuluj rezerwację"
+  "cancel_booking": "Anuluj rezerwację",
+  "what_broke": "Co zepsuło się: ",
+  "not_sure": "Nie jestem pewien/na",
+  "describe_issue": "Opisz co się stało",
+  "report": "Zgłoś",
+  "report_success": "Zgłoszenie wysłano pomyślnie"
 }

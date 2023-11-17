@@ -2,7 +2,7 @@ import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washer/app/router.dart';
-import 'package:washer/feature/book_laundry/presentation/widgets/styled_dropdown_button.dart';
+import 'package:washer/shared/widgets/styled_dropdown_button.dart';
 
 import '../bloc/book_laundry_bloc.dart';
 

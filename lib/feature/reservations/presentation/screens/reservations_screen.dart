@@ -42,15 +42,9 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 
   _deleteReservations(Reservation reservation) async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
     await context
         .read<DbRepository>()
         .deleteReservation(reservation, context.read<AuthRepository>().user!.uid);
-    // setState(() {
-    //   _isLoading = false;
-    // });
   }
 
   @override
@@ -122,7 +116,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('place').tr(args: [
+                                  const Text('full_place').tr(args: [
                                     _reservations[ind].dorm!.name,
                                     _reservations[ind].floor!.level.toString()
                                   ]),

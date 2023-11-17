@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:washer/feature/report/domain/entities/report.dart';
 import 'package:washer/shared/domain/entities/fire_user_entity.dart';
 import 'package:washer/shared/domain/entities/reservation_entity.dart';
 
@@ -128,5 +129,10 @@ class MixedDbRepository implements DbRepository {
       reservations.add(reservation);
     }
     return reservations;
+  }
+
+  @override
+  Future<void> sendReport(Report report, String userId) async {
+    await _db.collection('reports').add(report.toJson());
   }
 }
