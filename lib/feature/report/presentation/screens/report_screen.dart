@@ -200,12 +200,12 @@ class _ReportScreenState extends State<ReportScreen> {
           constraints: const BoxConstraints(minWidth: double.infinity, maxHeight: 58),
           child: ElevatedButton(
             onPressed: () {},
-            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFF86666)),
+            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF86666)),
             child: Center(
               child: const Text(
-                'Report',
+                'report',
                 style: TextStyle(fontSize: 24, color: Colors.white),
-              ),
+              ).tr(),
             ),
           ),
         ),
