@@ -157,4 +157,25 @@ class MixedDbRepository implements DbRepository {
     user.favDorm = dorm;
     result.reference.update(user.toJson());
   }
+
+  @override
+  Future<Reservation?> checkActiveLaundry(String userId) async {
+    DocumentSnapshot<Map<String, dynamic>> result = await _db.collection('users').doc(userId).get();
+    FireUser user = FireUser.fromJson(result.data(), userId);
+    for (Reservation res in user.reservations) {
+      var result = await res.selfReference!.get();
+      user.reservations[user.reservations.indexOf(res)] =
+          Reservation.fromJson(result.data(), result.reference);
+    }
+    user.reservations.sort((a, b) => a.start!.compareTo(b.start!));
+    var lastReservation = user.reservations.firstOrNull;
+    var now = DateTime.now();
+
+    if (lastReservation != null &&
+        lastReservation.start!.isBefore(now) &&
+        lastReservation.end!.isAfter(now)) {
+      return lastReservation;
+    }
+    return null;
+  }
 }

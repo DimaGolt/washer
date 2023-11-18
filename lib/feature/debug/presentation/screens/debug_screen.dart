@@ -3,6 +3,8 @@ import 'package:washer/app/router.dart';
 import 'package:washer/shared/widgets/appbar_wave.dart';
 import 'package:washer/shared/widgets/washer_scroll_view.dart';
 
+import '../../../../shared/domain/entities/reservation_entity.dart';
+
 @RoutePage()
 class DebugScreen extends StatelessWidget {
   const DebugScreen({super.key});
@@ -35,7 +37,9 @@ class DebugScreen extends StatelessWidget {
             ),
             ListTile(
               title: const Text('Active laundry'),
-              onTap: () => context.router.showActiveLaundry(),
+              onTap: () => context.router.showActiveLaundry(Reservation(
+                  start: DateTime.now().add(const Duration(minutes: 12)),
+                  end: DateTime.now().add(const Duration(minutes: 30)))),
             ),
           ],
         ),

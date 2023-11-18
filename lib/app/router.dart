@@ -15,6 +15,7 @@ import '../feature/report/presentation/screens/report_screen.dart';
 import '../feature/reservations/presentation/screens/reservations_screen.dart';
 import '../feature/settings/presentation/screens/personal_settings_screen.dart';
 import '../feature/settings/presentation/screens/settings_screen.dart';
+import '../shared/domain/entities/reservation_entity.dart';
 
 part 'router.gr.dart';
 
@@ -51,7 +52,8 @@ extension RouterExtension on StackRouter {
 
   Future showDebugScreen() => push(const DebugRoute());
 
-  Future showActiveLaundry() => push(const ActiveLaundryRoute());
+  Future showActiveLaundry(Reservation reservation) =>
+      push(ActiveLaundryRoute(reservation: reservation));
 
   Future showPickMachine() => push(const PickMachineRoute());
 
