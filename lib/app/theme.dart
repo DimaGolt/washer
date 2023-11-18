@@ -63,11 +63,19 @@ ThemeData get washerLightTheme => ThemeData(
     );
 
 extension ElevatedButtons on ThemeData {
-  ButtonStyle get elevatedButtonThemeInverted => ElevatedButton.styleFrom(
+  ButtonStyle get flatButtonThemeInverted => ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32),
+        ),
+      );
+
+  ButtonStyle get elevatedButtonThemeInverted => ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        elevation: 6,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
         ),
       );
 

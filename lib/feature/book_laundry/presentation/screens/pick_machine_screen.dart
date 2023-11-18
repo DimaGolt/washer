@@ -2,6 +2,8 @@ import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washer/app/router.dart';
+import 'package:washer/shared/domain/entities/dorm_entity.dart';
+import 'package:washer/shared/domain/entities/floor_entity.dart';
 import 'package:washer/shared/widgets/styled_dropdown_button.dart';
 
 import '../bloc/book_laundry_bloc.dart';
@@ -32,7 +34,7 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
                   children: [
-                    StyledDropdownButton(
+                    StyledDropdownButton<Dorm>(
                       selectedValue: state.selectedDorm,
                       hintText: 'dorm'.tr(),
                       values: state.dorms
@@ -49,7 +51,7 @@ class PickMachineScreen extends BlocConsumerWidget<BookLaundryBloc, BookLaundryS
                             }
                           : null,
                     ),
-                    StyledDropdownButton(
+                    StyledDropdownButton<Floor>(
                       margin: const EdgeInsets.only(top: 8, bottom: 16),
                       hintText: 'floor'.tr(args: ['']),
                       selectedValue: state.selectedFloor,

@@ -149,7 +149,7 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
                           SizedBox(
                             width: 200,
                             child: ElevatedButton(
-                              style: theme.elevatedButtonThemeInverted,
+                              style: theme.flatButtonThemeInverted,
                               onPressed: isLoading ? null : () => _validateAndRegister(bloc),
                               child: Text(
                                 'button_register',

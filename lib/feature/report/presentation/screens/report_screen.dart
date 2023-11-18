@@ -5,10 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:washer/app/router.dart';
 import 'package:washer/feature/report/domain/entities/report.dart';
 import 'package:washer/feature/report/presentation/bloc/report_bloc.dart';
+import 'package:washer/shared/domain/entities/laundromat_entity.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:washer/shared/widgets/appbar_wave.dart';
 import 'package:washer/shared/widgets/washer_scroll_view.dart';
 
+import '../../../../shared/domain/entities/dorm_entity.dart';
+import '../../../../shared/domain/entities/floor_entity.dart';
 import '../../../../shared/widgets/styled_dropdown_button.dart';
 
 @RoutePage()
@@ -52,7 +55,7 @@ class ReportScreen extends BlocConsumerWidget<ReportBloc, ReportState> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 24.0),
                     child: Column(
                       children: [
-                        StyledDropdownButton(
+                        StyledDropdownButton<Dorm>(
                           selectedValue: state.selectedDorm,
                           values: state.dorms
                               .map((e) => DropdownMenuItem(
@@ -70,7 +73,7 @@ class ReportScreen extends BlocConsumerWidget<ReportBloc, ReportState> {
                           hintText: 'choose_dorm'.tr(),
                           isPrimary: true,
                         ),
-                        StyledDropdownButton(
+                        StyledDropdownButton<Floor>(
                           selectedValue: state.selectedFloor,
                           values: state.floors
                               .map((e) => DropdownMenuItem(
@@ -116,7 +119,7 @@ class ReportScreen extends BlocConsumerWidget<ReportBloc, ReportState> {
                                   ],
                                   borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: StyledDropdownButton(
+                                child: StyledDropdownButton<Laundromat>(
                                   selectedValue: state.selectedLaundromat,
                                   values: state.laundromats
                                       .map((e) => DropdownMenuItem(

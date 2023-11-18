@@ -129,7 +129,7 @@ class LoginScreen extends BlocConsumerWidget<LoginCubit, LoginState> {
             SizedBox(
               width: 200,
               child: ElevatedButton(
-                style: theme.elevatedButtonThemeInverted,
+                style: theme.flatButtonThemeInverted,
                 onPressed: isLoading ? null : () => _validateAndLogin(bloc),
                 child: Text(
                   'button_login',
