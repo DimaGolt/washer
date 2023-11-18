@@ -45,5 +45,11 @@
   "not_sure": "I'm not sure",
   "describe_issue": "Write what happened",
   "report": "Report",
-  "report_success": "Report sent successfully"
+  "report_success": "Report sent successfully",
+  "account": "Account:",
+  "edit_personal": "Edit personal information",
+  "application": "Application:",
+  "language": "Language",
+  "changes_on_new_screen": "All changes will be shown on new screen",
+  "personal_settings": "Personal settings"
 }

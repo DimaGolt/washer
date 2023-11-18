@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:washer/app/router.dart';
-import 'package:washer/app/theme.dart';
 import 'package:washer/feature/settings/presentation/widgets/settings_button.dart';
 import 'package:washer/shared/utils/language_local.dart';
 import 'package:washer/shared/widgets/appbar_wave.dart';
@@ -28,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: WasherScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _accountSetting(context),
             _applicationSetting(context),
           ],
@@ -46,16 +45,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: Text(
-              'Account:',
+              'account',
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 32,
               ),
-            ),
+            ).tr(),
           ),
           SettingsButton(
             icon: Icons.account_circle,
-            text: 'Edit personal information',
+            text: 'edit_personal'.tr(),
             onPressed: context.router.showPersonalSettings,
           ),
           // SettingsButton(
@@ -79,12 +78,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: Text(
-              'Application:',
+              'application',
               style: TextStyle(
                 color: color,
                 fontSize: 32,
               ),
-            ),
+            ).tr(),
           ),
           // SettingsButton(
           //   icon: Icons.notifications,
@@ -93,11 +92,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // ),
           SettingsDropdown<Locale>(
             icon: Icons.language,
-            text: 'Language',
+            text: 'language'.tr(),
             onChanged: (val) {
               if (val != null) context.setLocale(val);
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Will show up on new screen')));
+                  .showSnackBar(SnackBar(content: const Text('changes_on_new_screen').tr()));
             },
             items: context.supportedLocales,
             selectedItem: context.locale,
