@@ -75,7 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 100,
                             width: double.infinity,
                             child: ActiveLaundryButton(
-                              onTap: () => context.router.showActiveLaundry(activeLaundry!),
+                              onTap: () => context.router
+                                  .showActiveLaundry(activeLaundry!)
+                                  .then((_) => _checkActive()),
                             ),
                           ),
                         ),
@@ -88,25 +90,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisCount: 2,
                           children: [
                             MenuTile(
-                              onTap: context.router.showPickMachine,
+                              onTap: () =>
+                                  context.router.showPickMachine().then((_) => _checkActive()),
                               icon: FontAwesomeIcons.solidCalendarMinus,
                               label: 'book_laundry'.tr(),
                               position: TilePosition.upLeft,
                             ),
                             MenuTile(
-                              onTap: context.router.showReport,
+                              onTap: () => context.router.showReport().then((_) => _checkActive()),
                               icon: FontAwesomeIcons.solidFlag,
                               label: 'report_machine'.tr(),
                               position: TilePosition.upRight,
                             ),
                             MenuTile(
-                              onTap: context.router.showReservations,
+                              onTap: () =>
+                                  context.router.showReservations().then((_) => _checkActive()),
                               icon: FontAwesomeIcons.solidCalendarDays,
                               label: 'check_bookings'.tr(),
                               position: TilePosition.downLeft,
                             ),
                             MenuTile(
-                              onTap: context.router.showSettings,
+                              onTap: () =>
+                                  context.router.showSettings().then((_) => _checkActive()),
                               icon: FontAwesomeIcons.gear,
                               label: 'settings'.tr(),
                               position: TilePosition.downRight,
