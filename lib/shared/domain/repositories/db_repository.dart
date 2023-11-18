@@ -21,6 +21,7 @@ abstract class DbRepository {
   Future<FireUser> getFireUser(String userId);
   Future<void> createFireUser(String userId);
   Future<void> changeFavDorm(Dorm dorm, String userId);
+  Future<Reservation?> checkActiveLaundry(String userId);
 
   static DbRepository build() => MixedDbRepository();
 }

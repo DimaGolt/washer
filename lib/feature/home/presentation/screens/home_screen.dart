@@ -6,10 +6,33 @@ import 'package:washer/app/router.dart';
 import 'package:washer/feature/home/presentation/widgets/active_laundry_button.dart';
 import 'package:washer/feature/home/presentation/widgets/menu_tile.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
+
+import '../../../../shared/domain/entities/reservation_entity.dart';
 
 @RoutePage()
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Reservation? activeLaundry;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkActive();
+  }
+
+  _checkActive() async {
+    activeLaundry = await context
+        .read<DbRepository>()
+        .checkActiveLaundry(context.read<AuthRepository>().user!.uid);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +68,17 @@ class HomeScreen extends StatelessWidget {
                           topLeft: Radius.circular(16), topRight: Radius.circular(16))),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 54.0, horizontal: 26),
-                        child: SizedBox(
-                          height: 100,
-                          width: double.infinity,
-                          child: ActiveLaundryButton(
-                            onTap: context.router.showActiveLaundry,
+                      if (activeLaundry != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 54.0, horizontal: 26),
+                          child: SizedBox(
+                            height: 100,
+                            width: double.infinity,
+                            child: ActiveLaundryButton(
+                              onTap: () => context.router.showActiveLaundry(activeLaundry!),
+                            ),
                           ),
                         ),
-                      ),
                       const SizedBox(height: 20),
                       Expanded(
                         child: GridView.count(
