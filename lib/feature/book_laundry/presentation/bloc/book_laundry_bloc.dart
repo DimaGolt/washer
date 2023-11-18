@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:washer/shared/domain/entities/fire_user_entity.dart';
 import 'package:washer/shared/domain/entities/reservation_entity.dart';
+import 'package:washer/shared/domain/repositories/auth_repository.dart';
 
 import '../../../../shared/domain/entities/dorm_entity.dart';
 import '../../../../shared/domain/entities/floor_entity.dart';
@@ -14,9 +16,11 @@ part 'book_laundry_event.dart';
 part 'book_laundry_state.dart';
 
 class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
+  final AuthRepository authRepository;
   final DbRepository dbRepository;
 
-  BookLaundryBloc({required this.dbRepository}) : super(BookLaundryState()) {
+  BookLaundryBloc({required this.dbRepository, required this.authRepository})
+      : super(BookLaundryState()) {
     on<BookLaundryStart>(_fetchDorms);
     on<BookLaundryPickDorm>(_fetchFloors);
     on<BookLaundryPickFloor>(_fetchLaundromats);
@@ -27,7 +31,14 @@ class BookLaundryBloc extends Bloc<BookLaundryEvent, BookLaundryState> {
   _fetchDorms(BookLaundryStart event, Emitter<BookLaundryState> emit) async {
     emit(BookLaundryState());
     final dorms = await dbRepository.getDorms();
-    emit(state.copyWith(status: BookLaundryStatus.loadedDorms, dorms: dorms));
+    var fireUser = await dbRepository.getFireUser(authRepository.user!.uid);
+    if (fireUser.favDorm != null) {
+      emit(state.copyWith(dorms: dorms));
+      add(BookLaundryPickDorm(
+          dorms.firstWhere((element) => element.name == fireUser.favDorm!.name)));
+    } else {
+      emit(state.copyWith(status: BookLaundryStatus.loadedDorms, dorms: dorms));
+    }
   }
 
   _fetchFloors(BookLaundryPickDorm event, Emitter<BookLaundryState> emit) async {
