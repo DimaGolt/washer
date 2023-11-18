@@ -33,6 +33,11 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
       },
       loading: (state) => isLoading.value = true,
+      success: (state) {
+        context.router.pop();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: const Text('register_success').tr()));
+      },
       orElse: () => isLoading.value = (state is Loading),
     );
   }

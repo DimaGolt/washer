@@ -10,6 +10,7 @@
   "forgot_password_header": "Forgot password?",
   "forgot_password_text": "Don’t worry! We got you covered! Write your email down and we’ll send you reset link.",
   "forgot_password_fab": "Send email",
+  "register_success": "Register successful! Now login with your account details",
   "book_laundry": "Book laundry",
   "report_machine": "Report machine",
   "check_bookings": "Check your bookings",
