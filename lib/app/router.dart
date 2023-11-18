@@ -13,6 +13,7 @@ import '../feature/login/presentation/screens/login_screen.dart';
 import '../feature/register/presentation/screens/register_screen.dart';
 import '../feature/report/presentation/screens/report_screen.dart';
 import '../feature/reservations/presentation/screens/reservations_screen.dart';
+import '../feature/settings/presentation/screens/personal_settings_screen.dart';
 import '../feature/settings/presentation/screens/settings_screen.dart';
 
 part 'router.gr.dart';
@@ -33,6 +34,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: ReservationsRoute.page),
         AutoRoute(page: ReportRoute.page),
         AutoRoute(page: SettingsRoute.page),
+        AutoRoute(page: PersonalSettingsRoute.page),
       ];
 }
 
@@ -60,4 +62,6 @@ extension RouterExtension on StackRouter {
   Future showReport() => push(const ReportRoute());
 
   Future showSettings() => push(const SettingsRoute());
+
+  Future showPersonalSettings() => push(const PersonalSettingsRoute());
 }

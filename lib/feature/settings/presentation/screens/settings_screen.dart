@@ -56,7 +56,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsButton(
             icon: Icons.account_circle,
             text: 'Edit personal information',
-            onPressed: () {},
+            onPressed: context.router.showPersonalSettings,
           ),
           // SettingsButton(
           //   icon: Icons.wallet,
