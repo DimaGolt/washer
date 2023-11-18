@@ -135,4 +135,13 @@ class MixedDbRepository implements DbRepository {
   Future<void> sendReport(Report report, String userId) async {
     await _db.collection('reports').add(report.toJson());
   }
+
+  @override
+  Future<FireUser> getFireUser(String userId) async {
+    DocumentSnapshot<Map<String, dynamic>> userDoc =
+        await _db.collection('users').doc(userId).get();
+
+    FireUser user = FireUser.fromJson(userDoc.data(), userId);
+    return user;
+  }
 }
