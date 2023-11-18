@@ -10,6 +10,7 @@
   "forgot_password_header": "Zapomniałeś hasło?",
   "forgot_password_text": "Nie martw się! Zapisz swój adres e-mail, a my wyślemy Ci link do strony z resetowaniem hasła.",
   "forgot_password_fab": "Wyślij kod",
+  "register_success": "Udało się zarejestrować! Teraz zaloguj się używając tych danych",
   "book_laundry": "Zarezerwuj pranie",
   "report_machine": "Zgłoś pralkę",
   "check_bookings": "Sprawdź rezerwacje",
