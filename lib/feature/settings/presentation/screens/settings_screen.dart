@@ -10,9 +10,14 @@ import 'package:washer/shared/widgets/washer_scroll_view.dart';
 import '../widgets/settings_dropdown.dart';
 
 @RoutePage()
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +58,11 @@ class SettingsScreen extends StatelessWidget {
             text: 'Edit personal information',
             onPressed: () {},
           ),
-          SettingsButton(
-            icon: Icons.wallet,
-            text: 'Edit wallet information',
-            onPressed: () {},
-          ),
+          // SettingsButton(
+          //   icon: Icons.wallet,
+          //   text: 'Edit wallet information',
+          //   onPressed: () {},
+          // ),
         ],
       ),
     );
@@ -81,15 +86,19 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
           ),
-          SettingsButton(
-            icon: Icons.notifications,
-            text: 'Notifications',
-            onPressed: () {},
-          ),
+          // SettingsButton(
+          //   icon: Icons.notifications,
+          //   text: 'Notifications',
+          //   onPressed: () {},
+          // ),
           SettingsDropdown<Locale>(
             icon: Icons.language,
             text: 'Language',
-            onChanged: (val) {},
+            onChanged: (val) {
+              if (val != null) context.setLocale(val);
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('Will show up on new screen')));
+            },
             items: context.supportedLocales,
             selectedItem: context.locale,
             itemBuilder: (locale) {
