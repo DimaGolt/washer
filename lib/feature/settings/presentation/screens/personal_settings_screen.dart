@@ -64,7 +64,6 @@ class _PersonalSettingsScreenState extends State<PersonalSettingsScreen> {
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-                    SettingsButton(icon: Icons.key, text: 'Change password', onPressed: () {}),
                     SettingsDropdown(
                       icon: Icons.apartment,
                       text: 'Choose dorm',
