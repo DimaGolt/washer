@@ -144,4 +144,9 @@ class MixedDbRepository implements DbRepository {
     FireUser user = FireUser.fromJson(userDoc.data(), userId);
     return user;
   }
+
+  @override
+  Future<void> createFireUser(String userId) async {
+    _db.collection('users').doc(userId).set(FireUser(userId: userId).toJson());
+  }
 }

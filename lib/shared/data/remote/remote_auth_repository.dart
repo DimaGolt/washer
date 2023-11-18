@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
 
 class RemoteAuthRepository implements AuthRepository {
   final _auth = FirebaseAuth.instance;
@@ -10,7 +11,8 @@ class RemoteAuthRepository implements AuthRepository {
   User get user => throw UnimplementedError();
 
   @override
-  Future<User> createUserWithEmail(String email, String password, String fullName) async {
+  Future<User> createUserWithEmail(
+      String email, String password, String fullName, DbRepository db) async {
     String? error;
     User user;
     try {
@@ -20,6 +22,7 @@ class RemoteAuthRepository implements AuthRepository {
       );
       await credential.user?.updateDisplayName(fullName);
       user = credential.user!;
+      db.createFireUser(user.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         error = 'The password provided is too weak.';

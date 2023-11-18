@@ -19,6 +19,7 @@ abstract class DbRepository {
   Future<List<Reservation>> getUserReservations(String userId);
   Future<void> sendReport(Report reservation, String userId);
   Future<FireUser> getFireUser(String userId);
+  Future<void> createFireUser(String userId);
 
   static DbRepository build() => MixedDbRepository();
 }

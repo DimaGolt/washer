@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
 
 import '../../../../shared/domain/repositories/auth_repository.dart';
 
@@ -15,10 +16,11 @@ class RegisterCubit extends Cubit<RegisterState> {
       : _authRepository = authRepository,
         super(const RegisterState.initial());
 
-  void registerWithEmail(String email, String password, String fullName) async {
+  void registerWithEmail(
+      String email, String password, String fullName, DbRepository dbRepository) async {
     emit(const RegisterState.loading());
     try {
-      await _authRepository.createUserWithEmail(email, password, fullName);
+      await _authRepository.createUserWithEmail(email, password, fullName, dbRepository);
     } catch (e) {
       emit(RegisterState.error(e.toString()));
       return;

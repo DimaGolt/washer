@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:washer/shared/data/app_auth_repository.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
 
 abstract class AuthRepository {
   User? get user;
 
-  Future<User> createUserWithEmail(String email, String password, String fullName);
+  Future<User> createUserWithEmail(String email, String password, String fullName, DbRepository db);
 
   Future<User> loginEmail(String email, String password);
 
