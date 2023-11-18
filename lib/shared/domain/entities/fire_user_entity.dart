@@ -4,7 +4,7 @@ import 'package:washer/shared/domain/entities/reservation_entity.dart';
 class FireUser {
   final String userId;
   final List<Reservation> reservations;
-  final Dorm? favDorm;
+  Dorm? favDorm;
 
   FireUser({
     required this.userId,

@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:washer/app/router.dart';
 import 'package:bloc_widgets/bloc_widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:washer/app/theme.dart';
 import 'package:washer/feature/register/presentation/bloc/register_cubit.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
 import 'package:washer/shared/utils/string_regexp.dart';
 import 'package:washer/shared/widgets/logo_widget.dart';
 
@@ -55,7 +57,7 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
                   height: 450,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 20.0),
-                    child: _form(bloc, theme),
+                    child: _form(bloc, theme, context.read<DbRepository>()),
                   ),
                 ),
               ],
@@ -66,7 +68,7 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
     );
   }
 
-  _form(RegisterCubit bloc, ThemeData theme) {
+  _form(RegisterCubit bloc, ThemeData theme, DbRepository dbRepository) {
     return Form(
       key: formKey,
       child: ValueListenableBuilder(
@@ -150,7 +152,8 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
                             width: 200,
                             child: ElevatedButton(
                               style: theme.flatButtonThemeInverted,
-                              onPressed: isLoading ? null : () => _validateAndRegister(bloc),
+                              onPressed:
+                                  isLoading ? null : () => _validateAndRegister(bloc, dbRepository),
                               child: Text(
                                 'button_register',
                                 style: TextStyle(
@@ -169,13 +172,10 @@ class RegisterScreen extends BlocConsumerWidget<RegisterCubit, RegisterState> {
     );
   }
 
-  _validateAndRegister(RegisterCubit bloc) {
+  _validateAndRegister(RegisterCubit bloc, DbRepository dbRepository) {
     if (formKey.currentState!.validate()) {
-      bloc.registerWithEmail(
-        emailKey.currentState!.value,
-        passwordKey.currentState!.value,
-        nameKey.currentState!.value,
-      );
+      bloc.registerWithEmail(emailKey.currentState!.value, passwordKey.currentState!.value,
+          nameKey.currentState!.value, dbRepository);
     }
   }
 }

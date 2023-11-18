@@ -8,6 +8,7 @@ import 'package:washer/shared/domain/repositories/auth_repository.dart';
 import 'package:washer/shared/domain/repositories/db_repository.dart';
 import 'package:washer/shared/widgets/appbar_wave.dart';
 import 'package:washer/shared/widgets/washer_scroll_view.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../shared/domain/entities/dorm_entity.dart';
 
@@ -40,7 +41,7 @@ class _PersonalSettingsScreenState extends State<PersonalSettingsScreen> {
 
     dorms = await dbRepo.getDorms();
     user = await dbRepo.getFireUser(authRepo.user!.uid);
-    selectedDorm = dorms.firstWhere((element) => element.name == user?.favDorm?.name);
+    selectedDorm = dorms.firstWhereOrNull((element) => element.name == user?.favDorm?.name);
 
     setState(() {
       isLoading = false;
@@ -67,7 +68,14 @@ class _PersonalSettingsScreenState extends State<PersonalSettingsScreen> {
                     SettingsDropdown(
                       icon: Icons.apartment,
                       text: 'choose_dorm'.tr(),
-                      onChanged: (_) {},
+                      onChanged: (dorm) {
+                        setState(() {
+                          selectedDorm = dorm;
+                        });
+                        context
+                            .read<DbRepository>()
+                            .changeFavDorm(dorm!, context.read<AuthRepository>().user!.uid);
+                      },
                       items: dorms,
                       selectedItem: selectedDorm,
                       itemBuilder: (dorm) {
