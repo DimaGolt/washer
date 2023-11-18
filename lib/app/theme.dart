@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 ThemeData get washerLightTheme => ThemeData(
-      fontFamily: 'BlackHanSans',
+      fontFamily: 'Lato',
       primarySwatch: const MaterialColor(0xFF68A8C9, <int, Color>{
         50: Color(0xFFEDF5F9),
         100: Color(0xFFD2E5EF),

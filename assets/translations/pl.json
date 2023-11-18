@@ -45,5 +45,11 @@
   "not_sure": "Nie jestem pewien/na",
   "describe_issue": "Opisz co się stało",
   "report": "Zgłoś",
-  "report_success": "Zgłoszenie wysłano pomyślnie"
+  "report_success": "Zgłoszenie wysłano pomyślnie",
+  "account": "Konto:",
+  "edit_personal": "Edytuj ustawienia personalne",
+  "application": "Aplikacja:",
+  "language": "Język",
+  "changes_on_new_screen": "Pełne zmiany będą widoczne na nowym ekranie",
+  "personal_settings": "Ustawienia personalne"
 }

@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:washer/app/router.dart';
-import 'package:washer/feature/settings/presentation/widgets/settings_button.dart';
 import 'package:washer/feature/settings/presentation/widgets/settings_dropdown.dart';
 import 'package:washer/shared/domain/entities/fire_user_entity.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
@@ -52,7 +52,7 @@ class _PersonalSettingsScreenState extends State<PersonalSettingsScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const AppBarWave(
-        title: 'Personal settings',
+        title: 'personal_settings',
       ),
       body: isLoading
           ? const Center(
@@ -66,7 +66,7 @@ class _PersonalSettingsScreenState extends State<PersonalSettingsScreen> {
                     const SizedBox(height: 20),
                     SettingsDropdown(
                       icon: Icons.apartment,
-                      text: 'Choose dorm',
+                      text: 'choose_dorm'.tr(),
                       onChanged: (_) {},
                       items: dorms,
                       selectedItem: selectedDorm,
