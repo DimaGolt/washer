@@ -68,7 +68,14 @@ class _PersonalSettingsScreenState extends State<PersonalSettingsScreen> {
                     SettingsDropdown(
                       icon: Icons.apartment,
                       text: 'choose_dorm'.tr(),
-                      onChanged: (_) {},
+                      onChanged: (dorm) {
+                        setState(() {
+                          selectedDorm = dorm;
+                        });
+                        context
+                            .read<DbRepository>()
+                            .changeFavDorm(dorm!, context.read<AuthRepository>().user!.uid);
+                      },
                       items: dorms,
                       selectedItem: selectedDorm,
                       itemBuilder: (dorm) {
