@@ -28,7 +28,9 @@ class WasherApp extends StatelessWidget {
         BlocProvider(create: (_) => LoginCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => RegisterCubit(authRepository: authRepository)),
         BlocProvider(create: (_) => ForgotPasswordCubit(authRepository: authRepository)),
-        BlocProvider(create: (_) => BookLaundryBloc(dbRepository: dbRepository)),
+        BlocProvider(
+            create: (_) =>
+                BookLaundryBloc(dbRepository: dbRepository, authRepository: authRepository)),
         BlocProvider(create: (_) => ReportBloc(dbRepository: dbRepository)),
       ],
       child: MaterialApp.router(
