@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                               position: TilePosition.downLeft,
                             ),
                             MenuTile(
-                              onTap: () {},
+                              onTap: context.router.showSettings,
                               icon: FontAwesomeIcons.gear,
                               label: 'settings'.tr(),
                               position: TilePosition.downRight,

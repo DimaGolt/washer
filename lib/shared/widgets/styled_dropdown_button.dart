@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:washer/shared/widgets/conditional_builder.dart';
 
-import 'conditional_builder.dart';
-
-class StyledDropdownButton extends StatelessWidget {
+class StyledDropdownButton<T> extends StatelessWidget {
   const StyledDropdownButton({
     super.key,
     required this.selectedValue,
@@ -18,9 +16,9 @@ class StyledDropdownButton extends StatelessWidget {
     this.isTransparent = false,
   });
 
-  final dynamic selectedValue;
-  final List<DropdownMenuItem> values;
-  final void Function(dynamic)? onChanged;
+  final T? selectedValue;
+  final List<DropdownMenuItem<T>> values;
+  final void Function(T?)? onChanged;
   final String hintText;
   final EdgeInsets? margin;
   final Widget? leading;
@@ -50,7 +48,7 @@ class StyledDropdownButton extends StatelessWidget {
             Expanded(child: child),
           ],
         ),
-        child: DropdownButton(
+        child: DropdownButton<T>(
           isExpanded: true,
           focusColor: Colors.red,
           value: selectedValue,

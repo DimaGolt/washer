@@ -25,7 +25,7 @@ class LandingScreen extends StatelessWidget {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: context.router.showLoginScreen,
-                style: Theme.of(context).elevatedButtonThemeInverted,
+                style: Theme.of(context).flatButtonThemeInverted,
                 child: SizedBox(
                   width: double.infinity,
                   child: Center(
