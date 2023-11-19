@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:washer/shared/utils/datetime.dart';
+import 'package:washer/shared/utils/reservation_time.dart';
 
-Future<DateTime?> showLaundryTimePicker({
+Future<ReservationTime?> showLaundryTimePicker({
   required BuildContext context,
-  required DateTime initialDate,
+  required ReservationTime initialDate,
 }) async {
-  return showDialog<DateTime>(
+  return showDialog<ReservationTime>(
     context: context,
     builder: (BuildContext context) {
       return LaundryTimePicker(initialDate: initialDate);
@@ -17,19 +17,19 @@ Future<DateTime?> showLaundryTimePicker({
 class LaundryTimePicker extends StatefulWidget {
   const LaundryTimePicker({super.key, required this.initialDate});
 
-  final DateTime initialDate;
+  final ReservationTime initialDate;
 
   @override
   State<LaundryTimePicker> createState() => _LaundryTimePickerState();
 }
 
 class _LaundryTimePickerState extends State<LaundryTimePicker> {
-  late List<DateTime> times = generateTimes(widget.initialDate);
+  late List<ReservationTime> times = generateTimes(widget.initialDate);
 
   final ScrollController _controller = ScrollController();
 
-  late DateTime _pickedDate;
-  late DateTime _pickedTime;
+  late ReservationTime _pickedDate;
+  late ReservationTime _pickedTime;
 
   void _animateToIndex(int index) {
     _controller.animateTo(
@@ -50,8 +50,8 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
   }
 
   void _handleOk() {
-    DateTime combinedTime =
-        _pickedDate.copyWith(hour: _pickedTime.hour, minute: _pickedTime.minute);
+    ReservationTime combinedTime =
+        _pickedDate.copyWith(hour: _pickedTime.time.hour, minute: _pickedTime.time.minute);
     Navigator.pop(context, combinedTime);
   }
 
@@ -68,11 +68,11 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
         child: Column(
           children: [
             CalendarDatePicker(
-                initialDate: widget.initialDate,
+                initialDate: widget.initialDate.time,
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 7)),
                 onDateChanged: (val) {
-                  _pickedDate = val;
+                  _pickedDate = _pickedDate.copyWith(month: val.month, day: val.day);
                 }),
             _timePicker(),
             _actions(),
@@ -110,8 +110,7 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
                     child: SizedBox(
                       width: 50,
                       child: Center(
-                        child: Text(
-                            '${times[index].hour.toString().padLeft(2, '0')}:${times[index].minute.toString().padLeft(2, '0')}'),
+                        child: Text(times[index].toStringHour()),
                       ),
                     ),
                   ),
