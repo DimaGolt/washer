@@ -3,6 +3,7 @@ import 'package:washer/shared/domain/entities/reservation_entity.dart';
 
 import '../../../feature/report/domain/entities/report.dart';
 import '../../data/mixed/mixed_db_repository.dart';
+import '../../utils/reservation_time.dart';
 import '../entities/dorm_entity.dart';
 import '../entities/floor_entity.dart';
 import '../entities/laundromat_entity.dart';
@@ -22,6 +23,7 @@ abstract class DbRepository {
   Future<void> createFireUser(String userId);
   Future<void> changeFavDorm(Dorm dorm, String userId);
   Future<Reservation?> checkActiveLaundry(String userId);
+  Future<List<ReservationTime>> getReservedTimesForLaundromat(Laundromat laundromat);
 
   static DbRepository build() => MixedDbRepository();
 }

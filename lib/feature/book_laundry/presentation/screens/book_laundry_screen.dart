@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:washer/shared/domain/entities/reservation_entity.dart';
 import 'package:washer/shared/domain/repositories/auth_repository.dart';
+import 'package:washer/shared/domain/repositories/db_repository.dart';
 import 'package:washer/shared/utils/datetime.dart';
 import 'package:washer/shared/utils/reservation_time.dart';
 
@@ -23,10 +24,23 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
   ReservationTime pickedDate = ReservationTime(time: DateTime.now().toNextHalf());
   WashType? pickedType;
   int? pickedTemperature;
+  List<ReservationTime> reservedTimes = [];
 
   final DateFormat dateFormat = DateFormat("EEE, d MMM");
 
   bool get canBook => pickedType != null && pickedTemperature != null;
+
+  @override
+  void initState() {
+    _getTimes();
+    super.initState();
+  }
+
+  _getTimes() async {
+    reservedTimes = await context
+        .read<DbRepository>()
+        .getReservedTimesForLaundromat(context.read<BookLaundryBloc>().state.selectedLaundromat!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +101,7 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
                   onTap: () => showLaundryTimePicker(
                     context: context,
                     initialDate: pickedDate,
+                    reservedTimes: reservedTimes,
                   ).then((value) {
                     if (value != null) {
                       pickedDate = value;

@@ -5,19 +5,24 @@ import 'package:washer/shared/utils/reservation_time.dart';
 Future<ReservationTime?> showLaundryTimePicker({
   required BuildContext context,
   required ReservationTime initialDate,
+  required List<ReservationTime> reservedTimes,
 }) async {
   return showDialog<ReservationTime>(
     context: context,
     builder: (BuildContext context) {
-      return LaundryTimePicker(initialDate: initialDate);
+      return LaundryTimePicker(
+        initialDate: initialDate,
+        reservedTimes: reservedTimes,
+      );
     },
   );
 }
 
 class LaundryTimePicker extends StatefulWidget {
-  const LaundryTimePicker({super.key, required this.initialDate});
+  const LaundryTimePicker({super.key, required this.initialDate, required this.reservedTimes});
 
   final ReservationTime initialDate;
+  final List<ReservationTime> reservedTimes;
 
   @override
   State<LaundryTimePicker> createState() => _LaundryTimePickerState();

@@ -7,6 +7,7 @@ import '../../domain/entities/dorm_entity.dart';
 import '../../domain/entities/floor_entity.dart';
 import '../../domain/entities/laundromat_entity.dart';
 import '../../domain/repositories/db_repository.dart';
+import '../../utils/reservation_time.dart';
 
 class MixedDbRepository implements DbRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -177,5 +178,20 @@ class MixedDbRepository implements DbRepository {
       return lastReservation;
     }
     return null;
+  }
+
+  @override
+  Future<List<ReservationTime>> getReservedTimesForLaundromat(Laundromat laundromat) async {
+    var document = await _db.collection('reservations').get();
+    List<Reservation> reservations = document.docs
+        .map((reservation) => Reservation.fromJson(reservation.data(), reservation.reference))
+        .toList();
+    reservations.removeWhere(
+        (reservation) => reservation.laundromat!.selfReference != laundromat.selfReference);
+    List<ReservationTime> times = [];
+    for (var reservation in reservations) {
+      times.addAll(ReservationTime.fromReservation(reservation));
+    }
+    return times;
   }
 }

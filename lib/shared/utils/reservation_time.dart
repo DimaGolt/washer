@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 
+import '../domain/entities/reservation_entity.dart';
+
 class ReservationTime {
   final DateTime time;
   bool isReserved;
@@ -8,6 +10,23 @@ class ReservationTime {
     required this.time,
     this.isReserved = false,
   }) : assert(time.minute == 30 || time.minute == 0);
+
+  static List<ReservationTime> fromReservation(Reservation reservation) {
+    DateTime startTime = reservation.start!;
+    DateTime endTime = reservation.end!.add(const Duration(minutes: 30));
+    List<ReservationTime> times = [];
+
+    ReservationTime helper = ReservationTime(time: startTime);
+    while (helper.time != endTime) {
+      times.add(helper);
+      if (helper.time.minute == 30) {
+        helper = helper.copyWith(hour: helper.time.hour + 1, minute: 0);
+      } else {
+        helper = helper.copyWith(minute: 30);
+      }
+    }
+    return times;
+  }
 
   String toStringHour() {
     return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
