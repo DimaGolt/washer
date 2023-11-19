@@ -40,6 +40,10 @@ class _BookLaundryScreenState extends State<BookLaundryScreen> {
     reservedTimes = await context
         .read<DbRepository>()
         .getReservedTimesForLaundromat(context.read<BookLaundryBloc>().state.selectedLaundromat!);
+    List<ReservationTime> times = generateTimes(pickedDate);
+    times.replaceReserved(reservedTimes);
+    pickedDate = times.closest(pickedDate);
+    setState(() {});
   }
 
   @override

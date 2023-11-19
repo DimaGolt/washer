@@ -33,7 +33,6 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
 
   final ScrollController _controller = ScrollController();
 
-  late ReservationTime _pickedDate;
   late ReservationTime _pickedTime;
 
   void _animateToIndex(int index) {
@@ -47,17 +46,15 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
   @override
   void initState() {
     super.initState();
-    _pickedDate = widget.initialDate;
-    _pickedTime = times.closest(_pickedDate);
+    times.replaceReserved(widget.reservedTimes);
+    _pickedTime = times.closest(widget.initialDate);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _animateToIndex(times.indexOf(_pickedTime));
     });
   }
 
   void _handleOk() {
-    ReservationTime combinedTime =
-        _pickedDate.copyWith(hour: _pickedTime.time.hour, minute: _pickedTime.time.minute);
-    Navigator.pop(context, combinedTime);
+    Navigator.pop(context, _pickedTime);
   }
 
   void _handleCancel() {
@@ -77,7 +74,10 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 7)),
                 onDateChanged: (val) {
-                  _pickedDate = _pickedDate.copyWith(month: val.month, day: val.day);
+                  _pickedTime = _pickedTime.copyWith(month: val.month, day: val.day);
+                  times = generateTimes(_pickedTime);
+                  times.replaceReserved(widget.reservedTimes);
+                  setState(() {});
                 }),
             _timePicker(),
             _actions(),
@@ -102,20 +102,23 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
             scrollDirection: Axis.horizontal,
             itemCount: times.length,
             itemBuilder: (_, index) {
+              ReservationTime time = times[index];
               return InkWell(
-                onTap: () {
-                  _pickedTime = times[index];
-                  setState(() {});
-                },
+                onTap: time.isReserved
+                    ? null
+                    : () {
+                        _pickedTime = time;
+                        setState(() {});
+                      },
                 child: Card(
                   elevation: 5,
-                  color: times[index] == _pickedTime ? Theme.of(context).primaryColor : null,
+                  color: _cardColor(time, context),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                       width: 50,
                       child: Center(
-                        child: Text(times[index].toStringHour()),
+                        child: Text(time.toStringHour()),
                       ),
                     ),
                   ),
@@ -126,6 +129,14 @@ class _LaundryTimePickerState extends State<LaundryTimePicker> {
         ),
       ),
     );
+  }
+
+  Color? _cardColor(ReservationTime time, BuildContext context) {
+    if (!time.isReserved) {
+      return time == _pickedTime ? Theme.of(context).primaryColor : null;
+    } else {
+      return Colors.grey;
+    }
   }
 
   _actions() {

@@ -16,7 +16,7 @@ class ReservationTime {
     DateTime endTime = reservation.end!.add(const Duration(minutes: 30));
     List<ReservationTime> times = [];
 
-    ReservationTime helper = ReservationTime(time: startTime);
+    ReservationTime helper = ReservationTime(time: startTime, isReserved: true);
     while (helper.time != endTime) {
       times.add(helper);
       if (helper.time.minute == 30) {
@@ -67,14 +67,45 @@ class ReservationTime {
         ),
         isReserved: isReserved ?? this.isReserved);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ReservationTime &&
+          runtimeType == other.runtimeType &&
+          time.hour == other.time.hour &&
+          time.minute == other.time.minute &&
+          time.day == other.time.day &&
+          time.month == other.time.month;
+
+  @override
+  int get hashCode => time.hashCode;
 }
 
 extension on ReservationTime {}
 
 extension ReservationTimeListUtils on List<ReservationTime> {
   ReservationTime closest(ReservationTime time) {
-    return reduce(
+    ReservationTime result = reduce(
         (a, b) => a.time.difference(time.time).abs() < b.time.difference(time.time).abs() ? a : b);
+    while (result.isReserved) {
+      int index = indexOf(result);
+      if (index < length) {
+        result = this[index + 1];
+      }
+    }
+    return result;
+  }
+
+  void replaceReserved(
+    List<ReservationTime> reservedTimes,
+  ) {
+    for (ReservationTime reservationTime in reservedTimes) {
+      int indexToReplace = indexWhere((element) => element == reservationTime);
+      if (indexToReplace != -1) {
+        this[indexToReplace].isReserved = true;
+      }
+    }
   }
 }
 
