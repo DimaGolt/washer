@@ -47,37 +47,3 @@ extension DateListUtils on List<DateTime> {
     return reduce((a, b) => a.difference(time).abs() < b.difference(time).abs() ? a : b);
   }
 }
-
-List<DateTime> generateTimes(DateTime initialDate) {
-  return [
-    initialDate.copyWith(hour: 7, minute: 00),
-    initialDate.copyWith(hour: 7, minute: 30),
-    initialDate.copyWith(hour: 8, minute: 00),
-    initialDate.copyWith(hour: 8, minute: 30),
-    initialDate.copyWith(hour: 9, minute: 00),
-    initialDate.copyWith(hour: 9, minute: 30),
-    initialDate.copyWith(hour: 10, minute: 00),
-    initialDate.copyWith(hour: 10, minute: 30),
-    initialDate.copyWith(hour: 11, minute: 00),
-    initialDate.copyWith(hour: 11, minute: 30),
-    initialDate.copyWith(hour: 12, minute: 00),
-    initialDate.copyWith(hour: 12, minute: 30),
-    initialDate.copyWith(hour: 13, minute: 00),
-    initialDate.copyWith(hour: 13, minute: 30),
-    initialDate.copyWith(hour: 14, minute: 00),
-    initialDate.copyWith(hour: 14, minute: 30),
-    initialDate.copyWith(hour: 15, minute: 00),
-    initialDate.copyWith(hour: 15, minute: 30),
-    initialDate.copyWith(hour: 16, minute: 00),
-    initialDate.copyWith(hour: 16, minute: 30),
-    initialDate.copyWith(hour: 17, minute: 00),
-    initialDate.copyWith(hour: 17, minute: 30),
-    initialDate.copyWith(hour: 18, minute: 00),
-    initialDate.copyWith(hour: 18, minute: 30),
-    initialDate.copyWith(hour: 19, minute: 00),
-    initialDate.copyWith(hour: 19, minute: 30),
-    initialDate.copyWith(hour: 20, minute: 00),
-    initialDate.copyWith(hour: 20, minute: 30),
-    initialDate.copyWith(hour: 21, minute: 00),
-  ];
-}
