@@ -13,7 +13,7 @@ class ReservationTime {
 
   static List<ReservationTime> fromReservation(Reservation reservation) {
     DateTime startTime = reservation.start!;
-    DateTime endTime = reservation.end!.add(const Duration(minutes: 30));
+    DateTime endTime = reservation.end!;
     List<ReservationTime> times = [];
 
     ReservationTime helper = ReservationTime(time: startTime, isReserved: true);
